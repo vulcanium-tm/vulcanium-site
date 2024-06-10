@@ -1,0 +1,18 @@
+services:
+  activemq:
+    image: 'symptoma/activemq:latest'
+    ports:
+      - '61616'
+  pulsar:
+    image: 'apachepulsar/pulsar:latest'
+    ports:
+      - '6650'
+      - '8080'
+    command: 'bin/pulsar standalone'
+  rabbitmq:
+    image: 'rabbitmq:latest'
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=secret'
+      - 'RABBITMQ_DEFAULT_USER=myuser'
+    ports:
+      - '5672'

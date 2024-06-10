@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "http://aws-demo.vulcanium.dev:8080",
+    "secure": false
+  }
+}

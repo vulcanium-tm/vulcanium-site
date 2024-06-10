@@ -1,0 +1,28 @@
+package dev.vulcanium.business.model.payments;
+
+/**
+ * When the user performs a payment using paypal
+ */
+public class PaypalPayment extends Payment {
+
+private String payerId;
+private String paymentToken;
+
+public PaypalPayment() {
+	super.setPaymentType(PaymentType.PAYPAL);
+}
+
+public void setPayerId(String payerId) {
+	this.payerId = payerId;
+}
+public String getPayerId() {
+	return payerId;
+}
+public void setPaymentToken(String paymentToken) {
+	this.paymentToken = paymentToken;
+}
+public String getPaymentToken() {
+	return paymentToken;
+}
+
+}
