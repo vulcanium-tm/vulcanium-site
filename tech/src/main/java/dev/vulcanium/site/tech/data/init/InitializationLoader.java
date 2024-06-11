@@ -1,13 +1,7 @@
-package dev.vulcanium.site.tech.init.data;
+package dev.vulcanium.site.tech.data.init;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.system.MerchantConfig;
 import dev.vulcanium.business.services.merchant.MerchantStoreService;
 import dev.vulcanium.business.services.reference.init.InitializationDatabase;
 import dev.vulcanium.business.services.system.MerchantConfigurationService;
@@ -15,9 +9,13 @@ import dev.vulcanium.business.services.system.SystemConfigurationService;
 import dev.vulcanium.business.services.user.GroupService;
 import dev.vulcanium.business.services.user.PermissionService;
 import dev.vulcanium.business.utils.CoreConfiguration;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.system.MerchantConfig;
 import dev.vulcanium.site.tech.admin.security.WebUserServices;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Component
 public class InitializationLoader {
