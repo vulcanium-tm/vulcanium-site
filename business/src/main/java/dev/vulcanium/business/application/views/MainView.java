@@ -8,4 +8,6 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Home")
 public class MainView extends VerticalLayout{
 
+public MainView(){
+}
 }
