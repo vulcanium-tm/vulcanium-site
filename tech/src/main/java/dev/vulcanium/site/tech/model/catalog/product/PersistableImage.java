@@ -1,9 +1,9 @@
 package dev.vulcanium.site.tech.model.catalog.product;
 
+import dev.vulcanium.business.model.entity.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
-import dev.vulcanium.site.tech.model.entity.Entity;
 
 @Setter
 @Getter

@@ -3,7 +3,7 @@ package dev.vulcanium.business.utils;
 import dev.vulcanium.business.model.common.Criteria;
 import dev.vulcanium.business.model.common.CriteriaOrderBy;
 import dev.vulcanium.business.model.merchant.MerchantStoreCriteria;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
+import dev.vulcanium.business.store.api.exception.RestApiException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +29,7 @@ public static Criteria buildRequestCriterias(Criteria criteria, Map<String, Stri
 	if(criteria == null)
 		throw new RestApiException("A criteria class type must be instantiated");
 	
-	mappingFields.keySet().stream().forEach(p -> {
+	mappingFields.keySet().forEach(p->{
 		try {
 			setValue(criteria, request, p, mappingFields.get(p));
 		} catch (Exception e) {

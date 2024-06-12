@@ -1,7 +1,7 @@
 package dev.vulcanium.site.tech.model.store;
 
 import dev.vulcanium.business.model.system.MerchantConfigurationType;
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 
 public class MerchantConfigEntity extends Entity {
 

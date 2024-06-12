@@ -3,7 +3,6 @@ package dev.vulcanium.business.model.generic;
 import java.io.Serializable;
 import java.text.Collator;
 import java.util.Locale;
-
 import org.hibernate.Hibernate;
 
 

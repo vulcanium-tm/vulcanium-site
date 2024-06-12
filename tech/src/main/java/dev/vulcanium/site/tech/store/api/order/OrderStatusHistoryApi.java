@@ -3,7 +3,7 @@ package dev.vulcanium.site.tech.store.api.order;
 import dev.vulcanium.business.constants.Constants;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.utils.AuthorizationUtils;
+import dev.vulcanium.site.tech.utils.AuthorizationUtils;
 import dev.vulcanium.site.tech.model.order.history.PersistableOrderStatusHistory;
 import dev.vulcanium.site.tech.model.order.history.ReadableOrderStatusHistory;
 import dev.vulcanium.site.tech.store.facade.order.OrderFacade;

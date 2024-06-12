@@ -16,8 +16,8 @@ import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.reference.zone.Zone;
 import dev.vulcanium.site.tech.model.references.ReadableZone;
 import dev.vulcanium.site.tech.populator.references.ReadableZonePopulator;
-import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ConversionRuntimeException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 
 @Service
 public class ZoneFacadeImpl implements ZoneFacade{

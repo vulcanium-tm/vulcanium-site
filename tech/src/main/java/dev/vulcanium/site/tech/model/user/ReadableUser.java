@@ -1,9 +1,9 @@
 package dev.vulcanium.site.tech.model.user;
 
+import dev.vulcanium.business.model.security.ReadableGroup;
+import dev.vulcanium.business.model.security.ReadablePermission;
 import java.util.ArrayList;
 import java.util.List;
-import dev.vulcanium.site.tech.model.security.ReadableGroup;
-import dev.vulcanium.site.tech.model.security.ReadablePermission;
 
 public class ReadableUser extends UserEntity {
 

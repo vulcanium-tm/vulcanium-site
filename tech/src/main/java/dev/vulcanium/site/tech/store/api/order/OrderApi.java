@@ -11,15 +11,15 @@ import dev.vulcanium.business.model.shoppingcart.ShoppingCart;
 import dev.vulcanium.business.services.customer.CustomerService;
 import dev.vulcanium.business.services.order.OrderService;
 import dev.vulcanium.business.services.shoppingcart.ShoppingCartService;
-import dev.vulcanium.business.utils.AuthorizationUtils;
+import dev.vulcanium.site.tech.utils.AuthorizationUtils;
 import dev.vulcanium.business.utils.LocaleUtils;
 import dev.vulcanium.site.tech.model.customer.PersistableCustomer;
 import dev.vulcanium.site.tech.model.customer.ReadableCustomer;
 import dev.vulcanium.site.tech.model.order.*;
 import dev.vulcanium.site.tech.populator.customer.ReadableCustomerPopulator;
-import dev.vulcanium.site.tech.store.api.exception.GenericRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.GenericRuntimeException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.store.facade.customer.CustomerFacade;
 import dev.vulcanium.site.tech.store.facade.order.OrderFacade;
 import dev.vulcanium.site.tech.store.security.services.CredentialsException;
@@ -402,6 +402,7 @@ public ReadableOrderConfirmation checkout(
 			throw new ResourceNotFoundException("Cart code " + code + " does not exist");
 		}
 		
+		//security password validation
 		PersistableCustomer presistableCustomer = order.getCustomer();
 		if(!StringUtils.isBlank(presistableCustomer.getPassword())) { //validate customer password
 			credentialsService.validateCredentials(presistableCustomer.getPassword(), presistableCustomer.getRepeatPassword(), merchantStore, language);
@@ -411,9 +412,11 @@ public ReadableOrderConfirmation checkout(
 		customer = customerFacade.populateCustomerModel(customer, order.getCustomer(), merchantStore, language);
 		
 		if(!StringUtils.isBlank(presistableCustomer.getPassword())) {
+			//check if customer already exist
 			customer.setAnonymous(false);
 			customer.setNick(customer.getEmailAddress()); //username
 			if(customerFacadev1.checkIfUserExists(customer.getNick(),  merchantStore)) {
+				//409 Conflict
 				throw new GenericRuntimeException("409", "Customer with email [" + customer.getEmailAddress() + "] is already registered");
 			}
 		}
@@ -424,7 +427,9 @@ public ReadableOrderConfirmation checkout(
 		Order modelOrder = orderFacade.processOrder(order, customer, merchantStore, language,
 				LocaleUtils.getLocale(language));
 		Long orderId = modelOrder.getId();
+		//populate order confirmation
 		order.setId(orderId);
+		// set customer id
 		order.getCustomer().setId(modelOrder.getCustomerId());
 		
 		return orderFacadeV1.orderConfirmation(modelOrder, customer, merchantStore, language);

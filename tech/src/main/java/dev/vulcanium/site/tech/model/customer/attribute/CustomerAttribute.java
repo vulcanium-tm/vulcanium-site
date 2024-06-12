@@ -1,8 +1,7 @@
 package dev.vulcanium.site.tech.model.customer.attribute;
 
+import dev.vulcanium.business.model.entity.Entity;
 import java.io.Serializable;
-
-import dev.vulcanium.site.tech.model.entity.Entity;
 
 public class CustomerAttribute extends Entity implements Serializable {
 

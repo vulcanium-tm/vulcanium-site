@@ -1,18 +1,26 @@
 package dev.vulcanium.site.tech.store.api.product;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import dev.vulcanium.business.exception.ServiceException;
+import dev.vulcanium.business.model.catalog.product.Product;
+import dev.vulcanium.business.model.catalog.product.image.ProductImage;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.services.catalog.product.image.ProductImageService;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
+import dev.vulcanium.site.tech.mapper.catalog.ReadableProductImageMapper;
+import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
+import dev.vulcanium.site.tech.model.entity.NameEntity;
+import io.swagger.annotations.*;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,36 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.catalog.product.image.ProductImageService;
-import dev.vulcanium.business.model.catalog.product.Product;
-import dev.vulcanium.business.model.catalog.product.image.ProductImage;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.mapper.catalog.ReadableProductImageMapper;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
-import dev.vulcanium.site.tech.model.entity.NameEntity;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

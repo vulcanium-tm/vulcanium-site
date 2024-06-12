@@ -1,8 +1,8 @@
 package dev.vulcanium.site.tech.store.facade.tax;
 
+import dev.vulcanium.business.model.entity.Entity;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.entity.Entity;
 import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
 import dev.vulcanium.site.tech.model.tax.PersistableTaxClass;
 import dev.vulcanium.site.tech.model.tax.PersistableTaxRate;

@@ -1,7 +1,7 @@
 package dev.vulcanium.site.tech.application.config;
 
 import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.utils.LanguageUtils;
+import dev.vulcanium.site.tech.utils.LanguageUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;

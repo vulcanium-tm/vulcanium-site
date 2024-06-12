@@ -1,8 +1,7 @@
 package dev.vulcanium.site.tech.model.tax;
 
+import dev.vulcanium.business.model.entity.Entity;
 import jakarta.validation.constraints.Size;
-
-import dev.vulcanium.site.tech.model.entity.Entity;
 
 public class TaxClassEntity extends Entity {
 

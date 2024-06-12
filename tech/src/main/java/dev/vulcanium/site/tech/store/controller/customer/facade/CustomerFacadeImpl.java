@@ -1,6 +1,7 @@
 package dev.vulcanium.site.tech.store.controller.customer.facade;
 
 import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.constants.EmailConstants;
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
 import dev.vulcanium.business.model.customer.Customer;
@@ -30,16 +31,16 @@ import dev.vulcanium.business.services.system.EmailService;
 import dev.vulcanium.business.services.system.optin.OptinService;
 import dev.vulcanium.business.services.user.GroupService;
 import dev.vulcanium.business.services.user.PermissionService;
+import dev.vulcanium.business.store.api.exception.ConversionRuntimeException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.business.utils.*;
-import dev.vulcanium.site.tech.constants.EmailConstants;
 import dev.vulcanium.site.tech.model.customer.*;
 import dev.vulcanium.site.tech.model.customer.address.Address;
 import dev.vulcanium.site.tech.model.customer.optin.PersistableCustomerOptin;
 import dev.vulcanium.site.tech.populator.customer.*;
-import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.store.facade.customer.CustomerFacade;
+import dev.vulcanium.site.tech.utils.EmailTemplatesUtils;
 import jakarta.inject.Inject;
 import java.security.Principal;
 import java.util.*;

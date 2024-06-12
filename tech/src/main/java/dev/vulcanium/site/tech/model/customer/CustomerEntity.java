@@ -1,17 +1,16 @@
 package dev.vulcanium.site.tech.model.customer;
 
-import java.io.Serializable;
-
+import dev.vulcanium.site.tech.model.customer.address.Address;
+import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
-import org.springframework.validation.annotation.Validated;
-
-import dev.vulcanium.site.tech.model.customer.address.Address;
-
-import io.swagger.annotations.ApiModelProperty;
-
+@Setter
+@Getter
 public class CustomerEntity extends Customer implements Serializable {
 
 private static final long serialVersionUID = 1L;
@@ -39,99 +38,5 @@ private String userName;
 
 private Double rating = 0D;
 private int ratingCount;
-
-public void setUserName(final String userName) {
-	this.userName = userName;
-}
-
-public String getUserName() {
-	return userName;
-}
-
-
-public void setStoreCode(final String storeCode) {
-	this.storeCode = storeCode;
-}
-
-
-public String getStoreCode() {
-	return storeCode;
-}
-
-
-public void setEmailAddress(final String emailAddress) {
-	this.emailAddress = emailAddress;
-}
-
-
-public String getEmailAddress() {
-	return emailAddress;
-}
-
-
-public void setLanguage(final String language) {
-	this.language = language;
-}
-public String getLanguage() {
-	return language;
-}
-
-
-public Address getBilling() {
-	return billing;
-}
-public void setBilling(final Address billing) {
-	this.billing = billing;
-}
-public Address getDelivery() {
-	return delivery;
-}
-public void setDelivery(final Address delivery) {
-	this.delivery = delivery;
-}
-
-public String getFirstName() {
-	return firstName;
-}
-
-
-public void setFirstName(String firstName) {
-	this.firstName = firstName;
-}
-
-
-public String getLastName() {
-	return lastName;
-}
-
-
-public void setLastName(String lastName) {
-	this.lastName = lastName;
-}
-
-
-public int getRatingCount() {
-	return ratingCount;
-}
-
-public void setRatingCount(int ratingCount) {
-	this.ratingCount = ratingCount;
-}
-
-public Double getRating() {
-	return rating;
-}
-
-public void setRating(Double rating) {
-	this.rating = rating;
-}
-
-public String getProvider() {
-	return provider;
-}
-
-public void setProvider(String provider) {
-	this.provider = provider;
-}
 
 }

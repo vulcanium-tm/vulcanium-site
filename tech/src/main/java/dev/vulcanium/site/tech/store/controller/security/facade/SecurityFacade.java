@@ -1,7 +1,7 @@
 package dev.vulcanium.site.tech.store.controller.security.facade;
 
+import dev.vulcanium.business.model.security.ReadablePermission;
 import java.util.List;
-import dev.vulcanium.site.tech.model.security.ReadablePermission;
 
 public interface SecurityFacade {
 

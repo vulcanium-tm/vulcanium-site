@@ -3,6 +3,7 @@ package dev.vulcanium.site.tech.store.api.product;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductAttribute;
 import dev.vulcanium.business.model.catalog.product.price.FinalPrice;
+import dev.vulcanium.business.model.entity.Entity;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.services.catalog.pricing.PricingService;
@@ -14,7 +15,6 @@ import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductVa
 import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableSelectedProductVariant;
 import dev.vulcanium.site.tech.model.catalog.product.variation.PersistableProductVariation;
 import dev.vulcanium.site.tech.model.catalog.product.variation.ReadableProductVariation;
-import dev.vulcanium.site.tech.model.entity.Entity;
 import dev.vulcanium.site.tech.model.entity.EntityExists;
 import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
 import dev.vulcanium.site.tech.populator.catalog.ReadableFinalPricePopulator;

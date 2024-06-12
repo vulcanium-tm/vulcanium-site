@@ -1,8 +1,7 @@
 package dev.vulcanium.site.tech.model.order;
 
+import dev.vulcanium.business.model.entity.Entity;
 import java.io.Serializable;
-
-import dev.vulcanium.site.tech.model.entity.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

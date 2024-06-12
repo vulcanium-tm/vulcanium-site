@@ -24,9 +24,9 @@ import dev.vulcanium.site.tech.model.catalog.manufacturer.ReadableManufacturerLi
 import dev.vulcanium.site.tech.model.entity.ListCriteria;
 import dev.vulcanium.site.tech.populator.manufacturer.PersistableManufacturerPopulator;
 import dev.vulcanium.site.tech.populator.manufacturer.ReadableManufacturerPopulator;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
 
 @Service("manufacturerFacade")
 public class ManufacturerFacadeImpl implements ManufacturerFacade {

@@ -7,6 +7,9 @@ import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.services.catalog.CatalogEntryService;
 import dev.vulcanium.business.services.catalog.CatalogService;
+import dev.vulcanium.business.store.api.exception.OperationNotAllowedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.mapper.catalog.PersistableCatalogMapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableCatalogCategoryEntryMapper;
@@ -16,9 +19,6 @@ import dev.vulcanium.site.tech.model.catalog.PersistableCatalogCategoryEntry;
 import dev.vulcanium.site.tech.model.catalog.ReadableCatalog;
 import dev.vulcanium.site.tech.model.catalog.ReadableCatalogCategoryEntry;
 import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
-import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import static dev.vulcanium.business.utils.ReadableEntityUtil.createReadableList;
+import static dev.vulcanium.site.tech.utils.ReadableEntityUtil.createReadableList;
 
 @Service("catalogFacade")
 public class CatalogFacadeImpl implements CatalogFacade {

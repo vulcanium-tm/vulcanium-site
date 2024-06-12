@@ -1,28 +1,25 @@
 package dev.vulcanium.site.tech.populator.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.model.security.PersistableGroup;
+import dev.vulcanium.business.model.user.Group;
+import dev.vulcanium.business.model.user.User;
 import dev.vulcanium.business.services.merchant.MerchantStoreService;
 import dev.vulcanium.business.services.reference.language.LanguageService;
 import dev.vulcanium.business.services.user.GroupService;
 import dev.vulcanium.business.utils.AbstractDataPopulator;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.model.user.Group;
-import dev.vulcanium.business.model.user.User;
-import dev.vulcanium.site.tech.model.security.PersistableGroup;
 import dev.vulcanium.site.tech.model.user.PersistableUser;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 
 @Component

@@ -2,7 +2,7 @@ package dev.vulcanium.site.tech.model.order;
 
 import java.io.Serializable;
 
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 
 
 public class OrderProduct extends Entity implements Serializable {

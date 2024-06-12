@@ -39,8 +39,8 @@ import dev.vulcanium.site.tech.model.user.PersistableUser;
 import dev.vulcanium.site.tech.model.user.ReadableUser;
 import dev.vulcanium.site.tech.model.user.ReadableUserList;
 import dev.vulcanium.site.tech.model.user.UserPassword;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
 import dev.vulcanium.site.tech.store.facade.user.UserFacade;
 
 import io.swagger.annotations.Api;

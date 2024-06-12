@@ -22,7 +22,7 @@ import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.system.MerchantConfig;
 import dev.vulcanium.business.model.system.MerchantConfiguration;
 import dev.vulcanium.site.tech.model.system.Configs;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 
 
 @Service

@@ -1,6 +1,6 @@
 package dev.vulcanium.business.utils;
 
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;

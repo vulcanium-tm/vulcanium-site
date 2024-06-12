@@ -1,10 +1,9 @@
 package dev.vulcanium.site.tech.model.configuration;
 
+import dev.vulcanium.business.model.entity.Entity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import dev.vulcanium.site.tech.model.entity.Entity;
 
 public class ConfigurationEntity extends Entity {
 

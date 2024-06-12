@@ -1,10 +1,10 @@
 package dev.vulcanium.site.tech.model.customer;
 
-import java.util.List;
+import dev.vulcanium.business.model.security.PersistableGroup;
 import dev.vulcanium.site.tech.model.customer.attribute.PersistableCustomerAttribute;
-import dev.vulcanium.site.tech.model.security.PersistableGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.List;
 
 @ApiModel(value="Customer", description="Customer model object")
 public class PersistableCustomer extends CustomerEntity {

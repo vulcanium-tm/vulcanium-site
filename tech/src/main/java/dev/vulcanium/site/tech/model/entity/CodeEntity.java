@@ -1,6 +1,8 @@
 package dev.vulcanium.site.tech.model.entity;
 
-public class CodeEntity extends Entity {
+import dev.vulcanium.business.model.entity.Entity;
+
+public class CodeEntity extends Entity{
 
 private static final long serialVersionUID = 1L;
 private String code;

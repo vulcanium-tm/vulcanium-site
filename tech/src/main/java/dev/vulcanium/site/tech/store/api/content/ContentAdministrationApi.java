@@ -1,15 +1,15 @@
 package dev.vulcanium.site.tech.store.api.content;
 
-import dev.vulcanium.business.model.content.Content;
-import dev.vulcanium.business.model.content.ContentFile;
 import dev.vulcanium.business.model.content.FileContentType;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.RestApiException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.business.utils.FileNameUtils;
 import dev.vulcanium.business.utils.ImageFilePath;
+import dev.vulcanium.site.tech.model.content.ContentFile;
 import dev.vulcanium.site.tech.model.content.ContentFolder;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.site.tech.model.content.common.Content;
 import dev.vulcanium.site.tech.store.facade.content.ContentFacade;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,9 +34,11 @@ import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * Administration tool dedicated api
+ * @author carlsamson
+ *
  */
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/v1")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ContentAdministrationApi {
 
@@ -136,6 +138,7 @@ public FileStatus upload(
 		contentFacade.addContentFile(cf, merchantStore.getCode());
 		return new FileStatus();
 	} catch (IOException e) {
+		//throw new ServiceRuntimeException("Error while getting file bytes");
 		LOGGER.error("Error when uploadging file",e);
 		FileStatus fs = new FileStatus();
 		fs.setError(e.getMessage());
@@ -154,8 +157,13 @@ public @ResponseBody String download(
 		@ApiIgnore Language language) {
 	String fileName = path.substring(path.lastIndexOf("/")+1, path.length());
 	try {
+		
+		//OutputContentFile file = contentFacade.download(merchantStore, FileContentType.IMAGE, fileName);
+		//return file.getFile().toByteArray();
+		//return "https://s3.ca-central-1.amazonaws.com/shopizer-carl/files/DEFAULT/85.jpg";
 		return null;
 	} catch (Exception e) {
+		//throw new ServiceRuntimeException("Error while getting file bytes");
 		LOGGER.error("Error when renaming file",e);
 		throw new ServiceRuntimeException("Error while downloading file [" + fileName + "]");
 	}
@@ -179,6 +187,7 @@ public FileStatus rename(
 		contentFacade.renameFile(merchantStore, FileContentType.IMAGE, fileName, newName);
 		return new FileStatus();
 	} catch (Exception e) {
+		//throw new ServiceRuntimeException("Error while getting file bytes");
 		LOGGER.error("Error when renaming file",e);
 		FileStatus fs = new FileStatus();
 		fs.setError(e.getMessage());
@@ -204,6 +213,7 @@ public FileStatus remove(
 		contentFacade.delete(merchantStore, fileName, FileContentType.IMAGE.name());
 		return new FileStatus();
 	} catch (Exception e) {
+		//throw new ServiceRuntimeException("Error while getting file bytes");
 		LOGGER.error("Error when renaming file",e);
 		FileStatus fs = new FileStatus();
 		fs.setError(e.getMessage());
@@ -245,6 +255,10 @@ private String decodeContentPath(String path) throws UnsupportedEncodingExceptio
 }
 
 class FileStatus implements Serializable {
+	
+	/**
+	 *
+	 */
 	private static final long serialVersionUID = 1L;
 	private boolean success = true;
 	private String error = null;
@@ -320,7 +334,10 @@ class ImageFile implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
+	/**
+	 *
+	 */
 	private static final long serialVersionUID = 1L;
 	private String url;
 	private String name;

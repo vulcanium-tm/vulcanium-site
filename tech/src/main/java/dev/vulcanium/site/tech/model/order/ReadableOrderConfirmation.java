@@ -1,13 +1,9 @@
 package dev.vulcanium.site.tech.model.order;
 
-import java.util.List;
-
-import dev.vulcanium.site.tech.model.customer.ReadableBilling;
-import dev.vulcanium.site.tech.model.customer.ReadableDelivery;
+import dev.vulcanium.business.model.entity.Entity;
 import dev.vulcanium.site.tech.model.customer.address.Address;
-import dev.vulcanium.site.tech.model.entity.Entity;
-import dev.vulcanium.site.tech.model.order.ReadableOrderProduct;
 import dev.vulcanium.site.tech.model.order.total.ReadableTotal;
+import java.util.List;
 
 public class ReadableOrderConfirmation extends Entity {
 

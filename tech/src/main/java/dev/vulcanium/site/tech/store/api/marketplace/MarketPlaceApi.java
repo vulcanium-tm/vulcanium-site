@@ -2,12 +2,12 @@ package dev.vulcanium.site.tech.store.api.marketplace;
 
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.utils.LanguageUtils;
+import dev.vulcanium.site.tech.utils.LanguageUtils;
 import dev.vulcanium.site.tech.model.marketplace.ReadableMarketPlace;
 import dev.vulcanium.site.tech.model.marketplace.SignupStore;
 import dev.vulcanium.site.tech.model.user.ReadableUser;
-import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.OperationNotAllowedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.store.controller.marketplace.facade.MarketPlaceFacade;
 import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
 import dev.vulcanium.site.tech.store.facade.user.UserFacade;

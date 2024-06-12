@@ -2,9 +2,9 @@ package dev.vulcanium.site.tech.store.controller.marketplace.facade;
 
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ConversionRuntimeException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import java.util.Optional;
 import jakarta.inject.Inject;
 

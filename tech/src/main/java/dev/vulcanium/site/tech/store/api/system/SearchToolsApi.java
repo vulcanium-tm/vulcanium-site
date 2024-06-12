@@ -1,12 +1,21 @@
 package dev.vulcanium.site.tech.store.api.system;
 
+import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.RestApiException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
+import dev.vulcanium.site.tech.model.user.ReadableUser;
+import dev.vulcanium.site.tech.store.controller.search.facade.SearchFacade;
+import dev.vulcanium.site.tech.store.facade.user.UserFacade;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,19 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.site.tech.model.user.ReadableUser;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-import dev.vulcanium.site.tech.store.controller.search.facade.SearchFacade;
-import dev.vulcanium.site.tech.store.facade.user.UserFacade;
-
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**

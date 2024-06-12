@@ -1,11 +1,12 @@
 package dev.vulcanium.site.tech.model.entity;
 
+import dev.vulcanium.business.model.entity.Entity;
 import jakarta.validation.constraints.NotEmpty;
 
 /**
  * Used as an input request object where an entity name and or id is important
  */
-public class NameEntity extends Entity {
+public class NameEntity extends Entity{
 
 private static final long serialVersionUID = 1L;
 @NotEmpty

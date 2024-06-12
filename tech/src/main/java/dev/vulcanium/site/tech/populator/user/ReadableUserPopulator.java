@@ -4,11 +4,11 @@ import dev.vulcanium.business.constants.Constants;
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.model.security.ReadableGroup;
 import dev.vulcanium.business.model.user.Group;
 import dev.vulcanium.business.model.user.User;
 import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.utils.DateUtil;
-import dev.vulcanium.site.tech.model.security.ReadableGroup;
 import dev.vulcanium.site.tech.model.user.ReadableUser;
 import org.apache.commons.lang3.Validate;
 

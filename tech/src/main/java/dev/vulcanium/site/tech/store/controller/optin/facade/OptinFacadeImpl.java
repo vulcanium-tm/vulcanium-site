@@ -9,7 +9,7 @@ import dev.vulcanium.site.tech.mapper.optin.PersistableOptinMapper;
 import dev.vulcanium.site.tech.mapper.optin.ReadableOptinMapper;
 import dev.vulcanium.site.tech.model.system.PersistableOptin;
 import dev.vulcanium.site.tech.model.system.ReadableOptin;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import jakarta.inject.Inject;
 import org.springframework.stereotype.Service;
 

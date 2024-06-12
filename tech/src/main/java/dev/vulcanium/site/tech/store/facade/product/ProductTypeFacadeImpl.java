@@ -1,25 +1,23 @@
 package dev.vulcanium.site.tech.store.facade.product;
 
-import java.util.stream.Collectors;
-
-import org.jsoup.helper.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.product.type.ProductTypeService;
 import dev.vulcanium.business.model.catalog.product.type.ProductType;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.product.type.ProductTypeService;
+import dev.vulcanium.business.store.api.exception.OperationNotAllowedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.mapper.catalog.PersistableProductTypeMapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableProductTypeMapper;
 import dev.vulcanium.site.tech.model.catalog.product.type.PersistableProductType;
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductType;
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductTypeList;
-import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import java.util.stream.Collectors;
+import org.jsoup.helper.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 @Service("productTypeFacade")
 public class ProductTypeFacadeImpl implements ProductTypeFacade {

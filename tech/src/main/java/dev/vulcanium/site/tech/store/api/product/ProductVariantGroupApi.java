@@ -1,44 +1,25 @@
 package dev.vulcanium.site.tech.store.api.product;
 
+import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.entity.Entity;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
+import dev.vulcanium.site.tech.model.catalog.product.variantgroup.PersistableProductVariantGroup;
+import dev.vulcanium.site.tech.model.catalog.product.variantgroup.ReadableProductVariantGroup;
+import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
+import dev.vulcanium.site.tech.store.facade.product.ProductVariantGroupFacade;
+import dev.vulcanium.site.tech.store.facade.user.UserFacade;
+import io.swagger.annotations.*;
+import jakarta.validation.Valid;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.site.tech.model.catalog.product.variantgroup.PersistableProductVariantGroup;
-import dev.vulcanium.site.tech.model.catalog.product.variantgroup.ReadableProductVariantGroup;
-import dev.vulcanium.site.tech.model.entity.Entity;
-import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-import dev.vulcanium.site.tech.store.facade.product.ProductVariantGroupFacade;
-import dev.vulcanium.site.tech.store.facade.user.UserFacade;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

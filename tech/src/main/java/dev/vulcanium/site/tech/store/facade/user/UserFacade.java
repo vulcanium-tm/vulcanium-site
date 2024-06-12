@@ -6,7 +6,7 @@ import dev.vulcanium.business.model.common.Criteria;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.user.UserCriteria;
-import dev.vulcanium.site.tech.model.security.ReadablePermission;
+import dev.vulcanium.business.model.security.ReadablePermission;
 import dev.vulcanium.site.tech.model.user.PersistableUser;
 import dev.vulcanium.site.tech.model.user.ReadableUser;
 import dev.vulcanium.site.tech.model.user.ReadableUserList;

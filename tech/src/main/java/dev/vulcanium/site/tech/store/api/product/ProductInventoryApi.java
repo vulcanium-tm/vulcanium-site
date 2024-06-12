@@ -1,34 +1,20 @@
 package dev.vulcanium.site.tech.store.api.product;
 
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.RestApiException;
+import dev.vulcanium.site.tech.model.catalog.product.inventory.PersistableInventory;
+import dev.vulcanium.site.tech.model.catalog.product.inventory.ReadableInventory;
+import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
+import dev.vulcanium.site.tech.store.facade.product.ProductInventoryFacade;
+import io.swagger.annotations.*;
 import jakarta.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.catalog.product.inventory.PersistableInventory;
-import dev.vulcanium.site.tech.model.catalog.product.inventory.ReadableInventory;
-import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
-import dev.vulcanium.site.tech.store.facade.product.ProductInventoryFacade;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

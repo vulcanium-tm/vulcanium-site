@@ -2,7 +2,7 @@ package dev.vulcanium.site.tech.model.user;
 
 import java.io.Serializable;
 
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 
 /**
  * Admin users

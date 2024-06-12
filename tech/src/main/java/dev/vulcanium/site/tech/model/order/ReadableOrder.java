@@ -1,60 +1,48 @@
 package dev.vulcanium.site.tech.model.order;
 
-import java.util.List;
-
+import dev.vulcanium.business.model.reference.currency.Currency;
 import dev.vulcanium.business.model.shipping.ShippingOption;
 import dev.vulcanium.site.tech.model.customer.ReadableBilling;
+import dev.vulcanium.site.tech.model.customer.ReadableCustomer;
 import dev.vulcanium.site.tech.model.customer.ReadableDelivery;
+import dev.vulcanium.site.tech.model.customer.address.Address;
+import dev.vulcanium.site.tech.model.order.total.OrderTotal;
 import dev.vulcanium.site.tech.model.order.total.ReadableTotal;
 import dev.vulcanium.site.tech.model.order.transaction.ReadablePayment;
+import dev.vulcanium.site.tech.model.store.ReadableMerchantStore;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 public class ReadableOrder extends Order {
 
 private static final long serialVersionUID = 1L;
 
-
+@Getter
 private ReadableBilling billing;
 private ReadableDelivery delivery;
+@Getter
 private ShippingOption shippingOption;
+@Getter
 private ReadablePayment payment;
+@Getter
 private ReadableTotal total;
+@Getter
 private List<ReadableOrderProduct> products;
 
-public List<ReadableOrderProduct> getProducts() {
-	return products;
-}
-public void setProducts(List<ReadableOrderProduct> products) {
-	this.products = products;
-}
-public ReadableDelivery getDelivery() {
+@Getter
+private ReadableCustomer customer;
+private Currency currencyModel;
+
+@Getter
+private ReadableMerchantStore store;
+@Getter
+private OrderTotal tax;
+@Getter
+private OrderTotal shipping;
+
+public Address getDelivery(){
 	return delivery;
 }
-public void setDelivery(ReadableDelivery delivery) {
-	this.delivery = delivery;
-}
-public ReadablePayment getPayment() {
-	return payment;
-}
-public void setPayment(ReadablePayment payment) {
-	this.payment = payment;
-}
-public ReadableTotal getTotal() {
-	return total;
-}
-public void setTotal(ReadableTotal total) {
-	this.total = total;
-}
-public ShippingOption getShippingOption() {
-	return shippingOption;
-}
-public void setShippingOption(ShippingOption shippingOption) {
-	this.shippingOption = shippingOption;
-}
-public ReadableBilling getBilling() {
-	return billing;
-}
-public void setBilling(ReadableBilling billing) {
-	this.billing = billing;
-}
-
 }

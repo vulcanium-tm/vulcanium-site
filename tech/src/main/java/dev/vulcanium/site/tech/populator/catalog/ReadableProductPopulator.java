@@ -30,32 +30,20 @@ import dev.vulcanium.site.tech.model.catalog.product.type.ProductTypeDescription
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductType;
 import java.util.*;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+@Setter
+@Getter
 public class ReadableProductPopulator extends
 		AbstractDataPopulator<Product, ReadableProduct> {
 
 private PricingService pricingService;
 
 private ImageFilePath imageUtils;
-
-public ImageFilePath getimageUtils() {
-	return imageUtils;
-}
-
-public void setimageUtils(ImageFilePath imageUtils) {
-	this.imageUtils = imageUtils;
-}
-
-public PricingService getPricingService() {
-	return pricingService;
-}
-
-public void setPricingService(PricingService pricingService) {
-	this.pricingService = pricingService;
-}
 
 @Override
 public ReadableProduct populate(Product source,
@@ -67,7 +55,7 @@ public ReadableProduct populate(Product source,
 	
 	try {
 		
-		List<dev.vulcanium.site.tech.model.catalog.product.ProductDescription> fulldescriptions = new ArrayList<dev.vulcanium.site.tech.model.catalog.product.ProductDescription>();
+		List<dev.vulcanium.site.tech.model.catalog.product.ProductDescription> fulldescriptions = new ArrayList<>();
 		if(language == null) {
 			target = new ReadableProductFull();
 		}
@@ -78,7 +66,7 @@ public ReadableProduct populate(Product source,
 		
 		ProductDescription description = source.getProductDescription();
 		
-		if(source.getDescriptions()!=null && source.getDescriptions().size()>0) {
+		if (source.getDescriptions()!=null && !source.getDescriptions().isEmpty()){
 			for(ProductDescription desc : source.getDescriptions()) {
 				if(language != null && desc.getLanguage()!=null && desc.getLanguage().getId().intValue() == language.getId().intValue()) {
 					description = desc;
@@ -167,8 +155,8 @@ public ReadableProduct populate(Product source,
 		}
 		
 		Set<ProductImage> images = source.getImages();
-		if(images!=null && images.size()>0) {
-			List<ReadableImage> imageList = new ArrayList<ReadableImage>();
+		if (images!=null && !images.isEmpty()){
+			List<ReadableImage> imageList = new ArrayList<>();
 			
 			String contextPath = imageUtils.getContextPath();
 			
@@ -176,15 +164,14 @@ public ReadableProduct populate(Product source,
 				ReadableImage prdImage = new ReadableImage();
 				prdImage.setImageName(img.getProductImage());
 				prdImage.setDefaultImage(img.isDefaultImage());
-				prdImage.setOrder(img.getSortOrder() != null ? img.getSortOrder().intValue() : 0);
+				prdImage.setOrder(img.getSortOrder()!=null ? img.getSortOrder() : 0);
 				
 				if (img.getImageType() == 1 && img.getProductImageUrl()!=null) {
 					prdImage.setImageUrl(img.getProductImageUrl());
 				} else {
-					StringBuilder imgPath = new StringBuilder();
-					imgPath.append(contextPath).append(imageUtils.buildProductImageUtils(store, source.getSku(), img.getProductImage()));
 					
-					prdImage.setImageUrl(imgPath.toString());
+					prdImage.setImageUrl(contextPath + imageUtils.buildProductImageUtils(store, source.getSku(),
+							img.getProductImage()));
 				}
 				prdImage.setId(img.getId());
 				prdImage.setImageType(img.getImageType());
@@ -212,7 +199,7 @@ public ReadableProduct populate(Product source,
 		if(!CollectionUtils.isEmpty(source.getCategories())) {
 			
 			ReadableCategoryPopulator categoryPopulator = new ReadableCategoryPopulator();
-			List<ReadableCategory> categoryList = new ArrayList<ReadableCategory>();
+			List<ReadableCategory> categoryList = new ArrayList<>();
 			
 			for(Category category : source.getCategories()) {
 				
@@ -235,9 +222,9 @@ public ReadableProduct populate(Product source,
 			if(!CollectionUtils.isEmpty(attributes)) {
 				
 				for(ProductAttribute attribute : attributes) {
-					ReadableProductOption opt = null;
+					ReadableProductOption opt;
 					ReadableProductAttribute attr = null;
-					ReadableProductProperty property = null;
+					ReadableProductProperty property;
 					ReadableProductPropertyValue propertyValue = null;
 					ReadableProductOptionValue optValue = new ReadableProductOptionValue();
 					ReadableProductAttributeValue attrValue = new ReadableProductAttributeValue();
@@ -254,7 +241,7 @@ public ReadableProduct populate(Product source,
 						readableOption.setId(attribute.getProductOption().getId());
 						
 						Set<ProductOptionDescription> podescriptions = attribute.getProductOption().getDescriptions();
-						if(podescriptions!=null && podescriptions.size()>0) {
+						if (podescriptions!=null && !podescriptions.isEmpty()){
 							for(ProductOptionDescription optionDescription : podescriptions) {
 								if(optionDescription.getLanguage().getCode().equals(language.getCode())) {
 									readableOption.setName(optionDescription.getName());
@@ -266,7 +253,7 @@ public ReadableProduct populate(Product source,
 						
 						Set<ProductOptionValueDescription> povdescriptions = attribute.getProductOptionValue().getDescriptions();
 						readableOptionValue.setId(attribute.getProductOptionValue().getId());
-						if(povdescriptions!=null && povdescriptions.size()>0) {
+						if (povdescriptions!=null && !povdescriptions.isEmpty()){
 							for(ProductOptionValueDescription optionValueDescription : povdescriptions) {
 								if(optionValueDescription.getLanguage().getCode().equals(language.getCode())) {
 									readableOptionValue.setName(optionValueDescription.getName());
@@ -280,7 +267,7 @@ public ReadableProduct populate(Product source,
 					} else {
 						
 						if(selectableOptions==null) {
-							selectableOptions = new TreeMap<Long,ReadableProductOption>();
+							selectableOptions = new TreeMap<>();
 						}
 						opt = selectableOptions.get(attribute.getProductOption().getId());
 						if(opt==null) {
@@ -305,13 +292,13 @@ public ReadableProduct populate(Product source,
 						}
 						optValue.setSortOrder(0);
 						if(attribute.getProductOptionSortOrder()!=null) {
-							optValue.setSortOrder(attribute.getProductOptionSortOrder().intValue());
+							optValue.setSortOrder(attribute.getProductOptionSortOrder());
 						}
 						
 						List<ProductOptionValueDescription> podescriptions = optionValue.getDescriptionsSettoList();
 						ProductOptionValueDescription podescription = null;
-						if(podescriptions!=null && podescriptions.size()>0) {
-							podescription = podescriptions.get(0);
+						if (podescriptions!=null && !podescriptions.isEmpty()){
+							podescription = podescriptions.getFirst();
 							if(podescriptions.size()>1) {
 								for(ProductOptionValueDescription optionValueDescription : podescriptions) {
 									if(optionValueDescription.getLanguage().getId().intValue()==language.getId().intValue()) {
@@ -335,7 +322,7 @@ public ReadableProduct populate(Product source,
 			}
 			
 			if(selectableOptions != null) {
-				List<ReadableProductOption> options = new ArrayList<ReadableProductOption>(selectableOptions.values());
+				List<ReadableProductOption> options = new ArrayList<>(selectableOptions.values());
 				target.setOptions(options);
 			}
 			
@@ -348,7 +335,7 @@ public ReadableProduct populate(Product source,
 			target.setQuantity(availability.getProductQuantity() == null ? 1:availability.getProductQuantity());
 			target.setQuantityOrderMaximum(availability.getProductQuantityOrderMax() == null ? 1:availability.getProductQuantityOrderMax());
 			target.setQuantityOrderMinimum(availability.getProductQuantityOrderMin()==null ? 1:availability.getProductQuantityOrderMin());
-			if(availability.getProductQuantity().intValue() > 0 && target.isAvailable()) {
+			if (availability.getProductQuantity()>0 && target.isAvailable()){
 				target.setCanBePurchased(true);
 			}
 		}
@@ -424,8 +411,8 @@ private ReadableProductOption createOption(ProductAttribute productAttribute, La
 	option.setCode(productAttribute.getProductOption().getCode());
 	List<ProductOptionDescription> descriptions = productAttribute.getProductOption().getDescriptionsSettoList();
 	ProductOptionDescription description = null;
-	if(descriptions!=null && descriptions.size()>0) {
-		description = descriptions.get(0);
+	if (descriptions!=null && !descriptions.isEmpty()){
+		description = descriptions.getFirst();
 		if(descriptions.size()>1) {
 			for(ProductOptionDescription optionDescription : descriptions) {
 				if(optionDescription.getLanguage().getCode().equals(language.getCode())) {
@@ -457,9 +444,7 @@ private ReadableProductType type (ProductType type, Language language) {
 	if(!CollectionUtils.isEmpty(type.getDescriptions())) {
 		Optional<ProductTypeDescription> desc = type.getDescriptions().stream().filter(t -> t.getLanguage().getCode().equals(language.getCode()))
 				                                        .map(d -> typeDescription(d)).findFirst();
-		if(desc.isPresent()) {
-			readableType.setDescription(desc.get());
-		}
+		desc.ifPresent(readableType::setDescription);
 	}
 	
 	return readableType;
@@ -482,8 +467,8 @@ private ReadableProductAttribute createAttribute(ProductAttribute productAttribu
 	attr.setType(productAttribute.getProductOption().getProductOptionType());
 	List<ProductOptionDescription> descriptions = productAttribute.getProductOption().getDescriptionsSettoList();
 	ProductOptionDescription description = null;
-	if(descriptions!=null && descriptions.size()>0) {
-		description = descriptions.get(0);
+	if (descriptions!=null && !descriptions.isEmpty()){
+		description = descriptions.getFirst();
 		if(descriptions.size()>1) {
 			for(ProductOptionDescription optionDescription : descriptions) {
 				if(optionDescription.getLanguage().getId().intValue()==language.getId().intValue()) {
@@ -521,8 +506,7 @@ private ReadableProductProperty createProperty(ProductAttribute productAttribute
 	
 	ReadableProductPropertyValue propertyValue = new ReadableProductPropertyValue();
 	
-	
-	if(descriptions!=null && descriptions.size()>0) {
+	if (descriptions!=null && !descriptions.isEmpty()){
 		for(ProductOptionDescription optionDescription : descriptions) {
 			dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription productOptionValueDescription = new dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription();
 			productOptionValueDescription.setId(optionDescription.getId());

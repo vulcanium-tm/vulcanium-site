@@ -2,7 +2,7 @@ package dev.vulcanium.business.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.vulcanium.site.tech.constants.ApplicationConstants;
+import dev.vulcanium.business.constants.ApplicationConstants;
 import jakarta.inject.Inject;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

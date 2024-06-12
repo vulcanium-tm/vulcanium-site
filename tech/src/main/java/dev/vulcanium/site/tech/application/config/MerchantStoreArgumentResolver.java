@@ -18,7 +18,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
 import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
 import dev.vulcanium.site.tech.store.facade.user.UserFacade;
 

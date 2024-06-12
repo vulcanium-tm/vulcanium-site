@@ -1,34 +1,26 @@
 package dev.vulcanium.site.tech.store.api.security;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import jakarta.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
-import dev.vulcanium.business.services.user.GroupService;
-import dev.vulcanium.business.services.user.PermissionService;
+import dev.vulcanium.business.model.security.ReadableGroup;
+import dev.vulcanium.business.model.security.ReadablePermission;
 import dev.vulcanium.business.model.user.Group;
 import dev.vulcanium.business.model.user.Permission;
-import dev.vulcanium.site.tech.model.security.ReadableGroup;
-import dev.vulcanium.site.tech.model.security.ReadablePermission;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-
+import dev.vulcanium.business.services.user.GroupService;
+import dev.vulcanium.business.services.user.PermissionService;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;
+import jakarta.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Api for managing security

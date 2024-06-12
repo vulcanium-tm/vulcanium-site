@@ -2,9 +2,9 @@ package dev.vulcanium.site.tech.store.api.system;
 
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.model.shop.ContactForm;
 import dev.vulcanium.business.services.reference.language.LanguageService;
-import dev.vulcanium.business.utils.EmailTemplatesUtils;
-import dev.vulcanium.site.tech.model.shop.ContactForm;
+import dev.vulcanium.site.tech.utils.EmailTemplatesUtils;
 import io.swagger.annotations.*;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;

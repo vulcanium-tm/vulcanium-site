@@ -25,7 +25,7 @@ import dev.vulcanium.business.model.order.orderproduct.OrderProductPrice;
 import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCartAttributeItem;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCartItem;
-import dev.vulcanium.site.tech.constants.ApplicationConstants;
+import dev.vulcanium.business.constants.ApplicationConstants;
 
 public class OrderProductPopulator extends
 		AbstractDataPopulator<ShoppingCartItem, OrderProduct> {

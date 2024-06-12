@@ -1,22 +1,17 @@
 package dev.vulcanium.site.tech.mapper.customer;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.model.customer.Customer;
 import dev.vulcanium.business.model.customer.attribute.CustomerAttribute;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.model.security.ReadableGroup;
 import dev.vulcanium.business.model.user.Group;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.model.customer.ReadableCustomer;
 import dev.vulcanium.site.tech.model.customer.address.Address;
-import dev.vulcanium.site.tech.model.customer.attribute.CustomerOptionDescription;
-import dev.vulcanium.site.tech.model.customer.attribute.CustomerOptionValueDescription;
-import dev.vulcanium.site.tech.model.customer.attribute.ReadableCustomerAttribute;
-import dev.vulcanium.site.tech.model.customer.attribute.ReadableCustomerOption;
-import dev.vulcanium.site.tech.model.customer.attribute.ReadableCustomerOptionValue;
-import dev.vulcanium.site.tech.model.security.ReadableGroup;
+import dev.vulcanium.site.tech.model.customer.attribute.*;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableCustomerMapper implements Mapper<Customer, ReadableCustomer> {

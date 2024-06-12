@@ -1,7 +1,7 @@
 package dev.vulcanium.site.tech.store.security;
 
+import dev.vulcanium.business.model.entity.Entity;
 import java.io.Serializable;
-import dev.vulcanium.site.tech.model.entity.Entity;
 
 public class AuthenticationResponse extends Entity implements Serializable {
 public AuthenticationResponse() {}

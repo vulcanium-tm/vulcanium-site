@@ -2,15 +2,18 @@ package dev.vulcanium.site.tech.store.api.catalog;
 
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.model.catalog.PersistableCatalog;
 import dev.vulcanium.site.tech.model.catalog.PersistableCatalogCategoryEntry;
 import dev.vulcanium.site.tech.model.catalog.ReadableCatalog;
 import dev.vulcanium.site.tech.model.catalog.ReadableCatalogCategoryEntry;
 import dev.vulcanium.site.tech.model.entity.EntityExists;
 import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.store.facade.catalog.CatalogFacade;
 import io.swagger.annotations.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")

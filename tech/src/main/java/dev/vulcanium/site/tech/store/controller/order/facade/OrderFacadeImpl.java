@@ -50,11 +50,12 @@ import dev.vulcanium.site.tech.populator.customer.PersistableCustomerPopulator;
 import dev.vulcanium.site.tech.populator.order.*;
 import dev.vulcanium.site.tech.populator.order.transaction.PersistablePaymentPopulator;
 import dev.vulcanium.site.tech.populator.order.transaction.ReadableTransactionPopulator;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.store.facade.customer.CustomerFacade;
 import dev.vulcanium.site.tech.store.facade.order.OrderFacade;
 import dev.vulcanium.site.tech.store.facade.shoppingcart.ShoppingCartFacade;
+import dev.vulcanium.site.tech.utils.EmailTemplatesUtils;
 import jakarta.inject.Inject;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -136,6 +137,11 @@ private ProductPriceUtils productPriceUtils;
 @Qualifier("img")
 private ImageFilePath imageUtils;
 
+public ReadableOrderConfirmation orderConfirmation(Order order, Customer customer, MerchantStore store,
+                                                   Language language){
+	return null;
+}
+
 @Override
 public ShopOrder initializeOrder(MerchantStore store, Customer customer, ShoppingCart shoppingCart,
                                  Language language) throws Exception {
@@ -155,7 +161,7 @@ public ShopOrder initializeOrder(MerchantStore store, Customer customer, Shoppin
 	order.setCustomer(persistableCustomer);
 	
 	// keep list of shopping cart items for core price calculation
-	List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>(shoppingCart.getLineItems());
+	List<ShoppingCartItem> items = new ArrayList<>(shoppingCart.getLineItems());
 	order.setShoppingCartItems(items);
 	
 	return order;
@@ -182,7 +188,7 @@ public OrderTotalSummary calculateOrderTotal(MerchantStore store,
 	populator.setProductService(productService);
 	populator.setShoppingCartService(shoppingCartService);
 	
-	List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>();
+	List<ShoppingCartItem> items = new ArrayList<>();
 	for (PersistableOrderProduct orderProduct : orderProducts) {
 		ShoppingCartItem item = populator.populate(orderProduct, new ShoppingCartItem(), store, language);
 		items.add(item);
@@ -190,20 +196,17 @@ public OrderTotalSummary calculateOrderTotal(MerchantStore store,
 	
 	Customer customer = customer(order.getCustomer(), store, language);
 	
-	OrderTotalSummary summary = this.calculateOrderTotal(store, customer, order, language);
-	
-	return summary;
+	return this.calculateOrderTotal(store, customer, order, language);
 }
 
 private OrderTotalSummary calculateOrderTotal(MerchantStore store, Customer customer,
                                               PersistableOrder order, Language language) throws Exception {
 	
-	OrderTotalSummary orderTotalSummary = null;
+	OrderTotalSummary orderTotalSummary;
 	
 	OrderSummary summary = new OrderSummary();
 	
-	if (order instanceof ShopOrder) {
-		ShopOrder o = (ShopOrder) order;
+	if (order instanceof ShopOrder o){
 		summary.setProducts(o.getShoppingCartItems());
 		
 		if (o.getShippingSummary() != null) {
@@ -250,22 +253,20 @@ private PersistableCustomer persistableCustomer(Customer customer, MerchantStore
 		throws Exception {
 	
 	PersistableCustomerPopulator customerPopulator = new PersistableCustomerPopulator();
-	PersistableCustomer persistableCustomer = customerPopulator.populate(customer, new PersistableCustomer(), store,
+	return customerPopulator.populate(customer, new PersistableCustomer(), store,
 			language);
-	return persistableCustomer;
 	
 }
 
 private Customer customer(PersistableCustomer customer, MerchantStore store, Language language) throws Exception {
 	
-	Customer cust = customerPopulator.populate(customer, new Customer(), store, language);
-	return cust;
+	return customerPopulator.populate(customer, new Customer(), store, language);
 	
 }
 
 private void setOrderTotals(OrderEntity order, OrderTotalSummary summary) {
 	
-	List<OrderTotal> totals = new ArrayList<OrderTotal>();
+	List<OrderTotal> totals = new ArrayList<>();
 	List<dev.vulcanium.business.model.order.OrderTotal> orderTotals = summary.getTotals();
 	for (dev.vulcanium.business.model.order.OrderTotal t : orderTotals) {
 		OrderTotal total = new OrderTotal();
@@ -335,7 +336,7 @@ private Order processOrderModel(ShopOrder order, Customer customer, Transaction 
 		// formatting
 		
 		List<ShoppingCartItem> shoppingCartItems = order.getShoppingCartItems();
-		Set<OrderProduct> orderProducts = new LinkedHashSet<OrderProduct>();
+		Set<OrderProduct> orderProducts = new LinkedHashSet<>();
 		
 		if (!StringUtils.isBlank(order.getComments())) {
 			OrderStatusHistory statusHistory = new OrderStatusHistory();
@@ -389,17 +390,13 @@ private Order processOrderModel(ShopOrder order, Customer customer, Transaction 
 		List<dev.vulcanium.business.model.order.OrderTotal> totals = summary.getTotals();
 		
 		// re-order totals
-		Collections.sort(totals, new Comparator<dev.vulcanium.business.model.order.OrderTotal>() {
-			public int compare(dev.vulcanium.business.model.order.OrderTotal x,
-			                   dev.vulcanium.business.model.order.OrderTotal y) {
-				if (x.getSortOrder() == y.getSortOrder())
-					return 0;
-				return x.getSortOrder() < y.getSortOrder() ? -1 : 1;
-			}
-			
+		Collections.sort(totals, (x, y)->{
+			if (x.getSortOrder()==y.getSortOrder())
+				return 0;
+			return x.getSortOrder()<y.getSortOrder() ? -1 : 1;
 		});
 		
-		Set<dev.vulcanium.business.model.order.OrderTotal> modelTotals = new LinkedHashSet<dev.vulcanium.business.model.order.OrderTotal>();
+		Set<dev.vulcanium.business.model.order.OrderTotal> modelTotals = new LinkedHashSet<>();
 		for (dev.vulcanium.business.model.order.OrderTotal total : totals) {
 			total.setOrder(modelOrder);
 			modelTotals.add(total);
@@ -430,7 +427,7 @@ private Order processOrderModel(ShopOrder order, Customer customer, Transaction 
 		if (order.getPayment() != null && order.getPayment().get("paymentToken") != null) {// set
 			// token
 			String paymentToken = order.getPayment().get("paymentToken");
-			Map<String, String> paymentMetaData = new HashMap<String, String>();
+			Map<String, String> paymentMetaData = new HashMap<>();
 			payment.setPaymentMetaData(paymentMetaData);
 			paymentMetaData.put("paymentToken", paymentToken);
 		}
@@ -579,7 +576,7 @@ public void refreshOrder(ShopOrder order, MerchantStore store, Customer customer
 		order.setCustomer(persistableCustomer);
 	}
 	
-	List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>(shoppingCart.getLineItems());
+	List<ShoppingCartItem> items = new ArrayList<>(shoppingCart.getLineItems());
 	order.setShoppingCartItems(items);
 	
 	return;
@@ -619,10 +616,8 @@ public ShippingQuote getShippingQuote(PersistableCustomer persistableCustomer, S
 		delivery = customer.getDelivery();
 	}
 	
-	ShippingQuote quote = shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
+	return shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
 			language);
-	
-	return quote;
 	
 }
 
@@ -638,8 +633,7 @@ private String validatePostalCode(String postalCode) {
 @Override
 public List<Country> getShipToCountry(MerchantStore store, Language language) throws Exception {
 	
-	List<Country> shippingCountriesList = shippingService.getShipToCountryList(store, language);
-	return shippingCountriesList;
+	return shippingService.getShipToCountryList(store, language);
 	
 }
 
@@ -824,17 +818,15 @@ public void validateOrder(ShopOrder order, BindingResult bindingResult, Map<Stri
 		
 		// validate payment
 		if (paymentType == null) {
-			ServiceException serviceException = new ServiceException(ServiceException.EXCEPTION_VALIDATION,
+			throw new ServiceException(ServiceException.EXCEPTION_VALIDATION,
 					"payment.required");
-			throw serviceException;
 		}
 		
 		// validate shipping
 		if (shippingService.requiresShipping(order.getShoppingCartItems(), store)
 				    && order.getSelectedShippingOption() == null) {
-			ServiceException serviceException = new ServiceException(ServiceException.EXCEPTION_VALIDATION,
+			throw new ServiceException(ServiceException.EXCEPTION_VALIDATION,
 					"shipping.required");
-			throw serviceException;
 		}
 		
 		// pre-validate credit card
@@ -871,9 +863,8 @@ public void validateOrder(ShopOrder order, BindingResult bindingResult, Map<Stri
 			}
 			
 			if (creditCardType == null) {
-				ServiceException serviceException = new ServiceException(ServiceException.EXCEPTION_VALIDATION,
+				throw new ServiceException(ServiceException.EXCEPTION_VALIDATION,
 						"cc.type");
-				throw serviceException;
 			}
 			
 		}
@@ -915,7 +906,7 @@ public ReadableOrderList getReadableOrderList(OrderCriteria criteria,
 			return returnList;
 		}
 		
-		List<ReadableOrder> readableOrders = new ArrayList<ReadableOrder>();
+		List<ReadableOrder> readableOrders = new ArrayList<>();
 		for (Order order : orders) {
 			ReadableOrder readableOrder = new ReadableOrder();
 			readableOrderPopulator.populate(order, readableOrder, null, null);
@@ -964,10 +955,8 @@ public ShippingQuote getShippingQuote(Customer customer, ShoppingCart cart,
 		delivery = customer.getDelivery();
 	}
 	
-	ShippingQuote quote = shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
+	return shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
 			language);
-	
-	return quote;
 }
 
 private ReadableOrderList populateOrderList(final OrderList orderList,
@@ -985,7 +974,7 @@ private ReadableOrderList populateOrderList(final OrderList orderList,
 	Locale locale = LocaleUtils.getLocale(language);
 	readableOrderPopulator.setLocale(locale);
 	
-	List<ReadableOrder> readableOrders = new ArrayList<ReadableOrder>();
+	List<ReadableOrder> readableOrders = new ArrayList<>();
 	for (Order order : orders) {
 		ReadableOrder readableOrder = new ReadableOrder();
 		try {
@@ -1007,7 +996,7 @@ private ReadableOrderList populateOrderList(final OrderList orderList,
 private void setOrderProductList(final Order order, final Locale locale, final MerchantStore store,
                                  final Language language, final ReadableOrder readableOrder)
 		throws ConversionException {
-	List<ReadableOrderProduct> orderProducts = new ArrayList<ReadableOrderProduct>();
+	List<ReadableOrderProduct> orderProducts = new ArrayList<>();
 	for (OrderProduct p : order.getOrderProducts()) {
 		ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
 		orderProductPopulator.setLocale(locale);
@@ -1045,7 +1034,7 @@ private ReadableOrderList getReadableOrderList(OrderCriteria criteria,
 		return null;
 	}
 	
-	List<ReadableOrder> readableOrders = new ArrayList<ReadableOrder>();
+	List<ReadableOrder> readableOrders = new ArrayList<>();
 	for (Order order : orders) {
 		ReadableOrder readableOrder = new ReadableOrder();
 		readableOrderPopulator.populate(order, readableOrder, store, language);
@@ -1094,7 +1083,7 @@ public ReadableOrder getReadableOrder(Long orderId, MerchantStore store,
 		readableOrderPopulator.populate(modelOrder, readableOrder, store, language);
 		
 		// order products
-		List<ReadableOrderProduct> orderProducts = new ArrayList<ReadableOrderProduct>();
+		List<ReadableOrderProduct> orderProducts = new ArrayList<>();
 		for (OrderProduct p : modelOrder.getOrderProducts()) {
 			ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
 			orderProductPopulator.setProductService(productService);
@@ -1150,9 +1139,8 @@ public ShippingQuote getShippingQuote(Customer customer, ShoppingCart cart, Merc
 		delivery = customer.getDelivery();
 	}
 	
-	ShippingQuote quote = shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
+	return shippingService.getShippingQuote(cart.getId(), store, delivery, shippingProducts,
 			language);
-	return quote;
 }
 
 /**
@@ -1183,9 +1171,9 @@ public Order processOrder(PersistableOrder order, Customer customer,
 		
 		Set<ShoppingCartItem> shoppingCartItems = cart.getLineItems();
 		
-		List<ShoppingCartItem> items = new ArrayList<ShoppingCartItem>(shoppingCartItems);
+		List<ShoppingCartItem> items = new ArrayList<>(shoppingCartItems);
 		
-		Set<OrderProduct> orderProducts = new LinkedHashSet<OrderProduct>();
+		Set<OrderProduct> orderProducts = new LinkedHashSet<>();
 		
 		OrderProductPopulator orderProductPopulator = new OrderProductPopulator();
 		orderProductPopulator.setDigitalProductService(digitalProductService);
@@ -1202,7 +1190,7 @@ public Order processOrder(PersistableOrder order, Customer customer,
 		modelOrder.setOrderProducts(orderProducts);
 		
 		if (order.getAttributes() != null && order.getAttributes().size() > 0) {
-			Set<OrderAttribute> attrs = new HashSet<OrderAttribute>();
+			Set<OrderAttribute> attrs = new HashSet<>();
 			for (dev.vulcanium.site.tech.model.order.OrderAttribute attribute : order.getAttributes()) {
 				OrderAttribute attr = new OrderAttribute();
 				attr.setKey(attribute.getKey());
@@ -1217,7 +1205,7 @@ public Order processOrder(PersistableOrder order, Customer customer,
 		ShippingSummary shippingSummary = null;
 		
 		// get shipping quote if asked for
-		if (order.getShippingQuote() != null && order.getShippingQuote().longValue() > 0) {
+		if (order.getShippingQuote()!=null && order.getShippingQuote()>0){
 			shippingSummary = shippingQuoteService.getShippingSummary(order.getShippingQuote(), store);
 			if (shippingSummary != null) {
 				modelOrder.setShippingModuleCode(shippingSummary.getShippingModule());
@@ -1229,11 +1217,11 @@ public Order processOrder(PersistableOrder order, Customer customer,
 		// of process order request. If totals does not match, an error
 		// should be thrown.
 		
-		OrderTotalSummary orderTotalSummary = null;
+		OrderTotalSummary orderTotalSummary;
 		
 		OrderSummary orderSummary = new OrderSummary();
 		orderSummary.setShippingSummary(shippingSummary);
-		List<ShoppingCartItem> itemsSet = new ArrayList<ShoppingCartItem>(cart.getLineItems());
+		List<ShoppingCartItem> itemsSet = new ArrayList<>(cart.getLineItems());
 		orderSummary.setProducts(itemsSet);
 		
 		orderTotalSummary = orderService.caculateOrderTotal(orderSummary, customer, store, language);
@@ -1261,7 +1249,7 @@ public Order processOrder(PersistableOrder order, Customer customer,
 		
 		modelOrder.setTotal(calculatedAmount);
 		List<dev.vulcanium.business.model.order.OrderTotal> totals = orderTotalSummary.getTotals();
-		Set<dev.vulcanium.business.model.order.OrderTotal> set = new HashSet<dev.vulcanium.business.model.order.OrderTotal>();
+		Set<dev.vulcanium.business.model.order.OrderTotal> set = new HashSet<>();
 		
 		if (!CollectionUtils.isEmpty(totals)) {
 			for (dev.vulcanium.business.model.order.OrderTotal total : totals) {
@@ -1364,7 +1352,7 @@ public ReadableOrderList getCapturableOrderList(MerchantStore store,
 		return null;
 	}
 	
-	List<ReadableOrder> readableOrders = new ArrayList<ReadableOrder>();
+	List<ReadableOrder> readableOrders = new ArrayList<>();
 	for (Order order : orders) {
 		ReadableOrder readableOrder = new ReadableOrder();
 		readableOrderPopulator.populate(order, readableOrder, store, language);
@@ -1405,9 +1393,8 @@ public List<ReadableOrderStatusHistory> getReadableOrderHistory(Long orderId, Me
 	}
 	
 	Set<OrderStatusHistory> historyList = order.getOrderHistory();
-	List<ReadableOrderStatusHistory> returnList = historyList.stream().map(f -> mapToReadbleOrderStatusHistory(f))
+	return historyList.stream().map(f->mapToReadbleOrderStatusHistory(f))
 			                                              .collect(Collectors.toList());
-	return returnList;
 }
 
 ReadableOrderStatusHistory mapToReadbleOrderStatusHistory(OrderStatusHistory source) {
@@ -1554,7 +1541,7 @@ public TransactionType nextTransaction(Long orderId, MerchantStore store) {
 public List<ReadableTransaction> listTransactions(Long orderId, MerchantStore store) {
 	Validate.notNull(orderId, "orderId must not be null");
 	Validate.notNull(store, "MerchantStore must not be null");
-	List<ReadableTransaction> trx = new ArrayList<ReadableTransaction>();
+	List<ReadableTransaction> trx = new ArrayList<>();
 	try {
 		Order modelOrder = orderService.getOrder(orderId, store);
 		
@@ -1564,8 +1551,8 @@ public List<ReadableTransaction> listTransactions(Long orderId, MerchantStore st
 		
 		List<Transaction> transactions = transactionService.listTransactions(modelOrder);
 		
-		ReadableTransaction transaction = null;
-		ReadableTransactionPopulator trxPopulator = null;
+		ReadableTransaction transaction;
+		ReadableTransactionPopulator trxPopulator;
 		
 		for(Transaction tr : transactions) {
 			transaction = new ReadableTransaction();

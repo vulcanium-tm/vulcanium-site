@@ -1,8 +1,8 @@
 package dev.vulcanium.site.tech.model.user;
 
+import dev.vulcanium.business.model.security.PersistableGroup;
 import java.util.ArrayList;
 import java.util.List;
-import dev.vulcanium.site.tech.model.security.PersistableGroup;
 
 public class PersistableUser extends UserEntity {
 

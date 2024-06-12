@@ -4,7 +4,7 @@ import dev.vulcanium.business.constants.Constants;
 import dev.vulcanium.business.model.catalog.product.file.DigitalProduct;
 import dev.vulcanium.business.model.content.FileContentType;
 import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.site.tech.model.order.ReadableOrderProductDownload;
+import dev.vulcanium.business.model.order.ReadableOrderProductDownload;
 import jakarta.annotation.Resource;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
@@ -144,7 +144,7 @@ private String getDomainName(String domainName) {
 
 private String getScheme(MerchantStore store) {
 	String baseScheme = store.getDomainName();
-	if (baseScheme != null && baseScheme.length() > 0
+	if (baseScheme!=null && !baseScheme.isEmpty()
 			    && baseScheme.charAt(baseScheme.length() - 1) == Constants.SLASH.charAt(0)) {
 		baseScheme = baseScheme.substring(0, baseScheme.length() - 1);
 	}

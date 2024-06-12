@@ -1,6 +1,6 @@
 package dev.vulcanium.site.tech.model.content;
 
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

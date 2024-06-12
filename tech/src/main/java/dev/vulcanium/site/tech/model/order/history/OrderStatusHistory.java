@@ -1,6 +1,6 @@
 package dev.vulcanium.site.tech.model.order.history;
 
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 
 public class OrderStatusHistory extends Entity {
 

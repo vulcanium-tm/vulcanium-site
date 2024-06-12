@@ -28,7 +28,6 @@ extra["solaceSpringBootVersion"] = "2.0.0"
 extra["vaadinVersion"] = "24.4.1"
 
 dependencies {
-    implementation("org.owasp.antisamy:antisamy:latest.release")
     implementation("org.passay:passay:latest.release")
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
     implementation("io.jsonwebtoken:jjwt:latest.release")

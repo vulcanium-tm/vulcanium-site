@@ -1,11 +1,10 @@
 package dev.vulcanium.site.tech.model.customer;
 
+import dev.vulcanium.business.model.security.ReadableGroup;
+import dev.vulcanium.site.tech.model.customer.attribute.ReadableCustomerAttribute;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import dev.vulcanium.site.tech.model.customer.attribute.ReadableCustomerAttribute;
-import dev.vulcanium.site.tech.model.security.ReadableGroup;
 
 public class ReadableCustomer extends CustomerEntity implements Serializable {
 

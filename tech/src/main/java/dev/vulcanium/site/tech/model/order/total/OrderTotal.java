@@ -1,9 +1,8 @@
 package dev.vulcanium.site.tech.model.order.total;
 
+import dev.vulcanium.business.model.entity.Entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
-
-import dev.vulcanium.site.tech.model.entity.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

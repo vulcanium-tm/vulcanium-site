@@ -1,6 +1,6 @@
 package dev.vulcanium.site.tech.model.references;
 
-import dev.vulcanium.site.tech.model.entity.Entity;
+import dev.vulcanium.business.model.entity.Entity;
 
 public class ZoneEntity extends Entity {
 

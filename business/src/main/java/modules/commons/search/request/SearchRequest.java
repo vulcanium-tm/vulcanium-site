@@ -1,4 +1,5 @@
 package modules.commons.search.request;
+
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SearchRequest {
-
 
 private String searchString;
 private List<String> filters;

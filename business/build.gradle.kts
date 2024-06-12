@@ -28,6 +28,8 @@ extra["solaceSpringBootVersion"] = "2.0.0"
 extra["vaadinVersion"] = "24.4.1"
 
 dependencies {
+    implementation("jakarta.faces:jakarta.faces-api:latest.release")
+    implementation("org.owasp.antisamy:antisamy:latest.release")
     implementation("com.vaadin:vaadin-spring-boot-starter")
     implementation("net.sf.ehcache:ehcache:latest.release")
     implementation("com.maxmind.geoip2:geoip2:latest.release")

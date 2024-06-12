@@ -1,28 +1,7 @@
 package dev.vulcanium.site.tech.store.facade.category;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.lang3.Validate;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.category.CategoryService;
-import dev.vulcanium.business.services.catalog.product.attribute.ProductAttributeService;
-import dev.vulcanium.business.services.merchant.MerchantStoreService;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductAttribute;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOption;
@@ -30,6 +9,13 @@ import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionDescr
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.category.CategoryService;
+import dev.vulcanium.business.services.catalog.product.attribute.ProductAttributeService;
+import dev.vulcanium.business.services.merchant.MerchantStoreService;
+import dev.vulcanium.business.store.api.exception.OperationNotAllowedException;
+import dev.vulcanium.business.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.business.store.api.exception.UnauthorizedException;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.model.catalog.category.PersistableCategory;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
@@ -39,11 +25,14 @@ import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductVa
 import dev.vulcanium.site.tech.model.entity.ListCriteria;
 import dev.vulcanium.site.tech.populator.catalog.PersistableCategoryPopulator;
 import dev.vulcanium.site.tech.populator.catalog.ReadableCategoryPopulator;
-import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-import dev.vulcanium.site.tech.store.facade.category.CategoryFacade;
+import jakarta.inject.Inject;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.Validate;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service(value = "categoryFacade")
 public class CategoryFacadeImpl implements CategoryFacade {

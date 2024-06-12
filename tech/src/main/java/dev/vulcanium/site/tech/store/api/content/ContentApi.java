@@ -1,19 +1,18 @@
 package dev.vulcanium.site.tech.store.api.content;
 
-import dev.vulcanium.business.model.content.ContentFile;
 import dev.vulcanium.business.model.content.ContentType;
+import dev.vulcanium.business.model.entity.Entity;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.content.*;
 import dev.vulcanium.site.tech.model.content.box.PersistableContentBox;
 import dev.vulcanium.site.tech.model.content.box.ReadableContentBox;
 import dev.vulcanium.site.tech.model.content.page.PersistableContentPage;
 import dev.vulcanium.site.tech.model.content.page.ReadableContentPage;
-import dev.vulcanium.site.tech.model.entity.Entity;
 import dev.vulcanium.site.tech.model.entity.EntityExists;
 import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
 import dev.vulcanium.site.tech.store.facade.content.ContentFacade;
 import io.swagger.annotations.*;
 import jakarta.inject.Inject;
@@ -33,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/v1")
 @Api(tags = { "Content management resource (Content Management Api)" })
 @SwaggerDefinition(tags = {
 		@Tag(name = "Content management resource", description = "Add pages, content boxes, manage images and files") })
@@ -82,6 +81,7 @@ public ReadableEntityList<ReadableContentPage> pages(
 public List<ReadableContentBox> pagesSummary(
 		@ApiIgnore MerchantStore merchantStore,
 		@ApiIgnore Language language) {
+	//return contentFacade.getContentBoxes(ContentType.BOX, "summary_", merchantStore, language);
 	return null;
 }
 
@@ -374,6 +374,7 @@ public ContentFolder images(@ApiIgnore MerchantStore merchantStore, @ApiIgnore L
                             @RequestParam(value = "path", required = false) String path, HttpServletRequest request,
                             HttpServletResponse response) throws Exception {
 	
+	//String decodedPath = decodeContentPath(path);
 	ContentFolder folder = contentFacade.getContentFolder(path, merchantStore);
 	return folder;
 }
@@ -408,6 +409,8 @@ public void upload(@RequestParam("file") MultipartFile file, @ApiIgnore Merchant
 @PostMapping(value = "/private/files", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
 @ResponseStatus(HttpStatus.CREATED)
 @ApiImplicitParams({
+		// @ApiImplicitParam(name = "file[]", value = "File stream object",
+		// required = true,dataType = "MultipartFile",allowMultiple = true),
 		@ApiImplicitParam(name = "store", dataType = "String", defaultValue = "DEFAULT"),
 		@ApiImplicitParam(name = "lang", dataType = "String", defaultValue = "en") })
 public void uploadMultipleFiles(@RequestParam(value = "file[]", required = true) MultipartFile[] files,
@@ -440,6 +443,7 @@ public void uploadMultipleFiles(@RequestParam(value = "file[]", required = true)
 public void updatePage(@PathVariable Long id, @RequestBody @Valid PersistableContentEntity page,
                        @ApiIgnore MerchantStore merchantStore, @ApiIgnore Language language) {
 	page.setId(id);
+	//contentFacade.saveContentPage(page, merchantStore, language);
 }
 
 /**
@@ -454,6 +458,26 @@ public void updatePage(@PathVariable Long id, @RequestBody @Valid PersistableCon
 public void deleteContent(Long id, @ApiIgnore MerchantStore merchantStore) {
 	contentFacade.delete(merchantStore, id);
 }
+
+/*  *//**
+ * Deletes a content from CMS
+ *
+ * @param name
+ *//*
+ * @DeleteMapping(value = "/private/content/page/{id}")
+ *
+ * @ApiOperation(httpMethod = "DELETE", value =
+ * "Deletes a file from CMS", notes = "Delete a file from server",
+ * response = Void.class)
+ *
+ * @ApiImplicitParams({
+ *
+ * @ApiImplicitParam(name = "store", dataType = "String",
+ * defaultValue = "DEFAULT")}) public void deleteFile( Long id,
+ *
+ * @ApiIgnore MerchantStore merchantStore) {
+ * contentFacade.deletePage(merchantStore, id); }
+ */
 
 /**
  * Deletes a file from CMS
