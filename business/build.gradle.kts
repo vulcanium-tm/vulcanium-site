@@ -4,7 +4,6 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
     id("dev.hilla") version "2.5.5"
-    id("com.vaadin") version "24.3.11"
 }
 
 group = "dev.vulcanium.business"
@@ -26,7 +25,7 @@ repositories {
 
 extra["hillaVersion"] = "2.5.5"
 extra["solaceSpringBootVersion"] = "2.0.0"
-extra["vaadinVersion"] = "24.3.11"
+extra["vaadinVersion"] = "24.4.1"
 
 dependencies {
     implementation("com.vaadin:vaadin-spring-boot-starter")

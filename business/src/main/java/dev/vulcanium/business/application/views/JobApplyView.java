@@ -6,13 +6,13 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
-@PageTitle("Contact")
-@Route(value = "contact", layout = MainView.class)
+@PageTitle("Job Apply")
+@Route(value = "Jobs", layout = MainView.class)
 @CssImport("./styles/views/helloworld/hello-world-view.css")
 @RouteAlias(value = "", layout = MainView.class)
-public class ContactView extends VerticalLayout{
+public class JobApplyView extends VerticalLayout{
 
-public ContactView(){
-	setId("contact-view");
+public JobApplyView(){
+	VerticalLayout about = new VerticalLayout();
 }
 }
