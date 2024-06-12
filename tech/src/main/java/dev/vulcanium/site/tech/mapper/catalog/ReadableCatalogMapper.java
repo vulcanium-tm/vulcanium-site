@@ -1,26 +1,20 @@
 package dev.vulcanium.site.tech.mapper.catalog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.model.catalog.Catalog;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.common.audit.AuditSection;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.DateUtil;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.model.catalog.ReadableCatalog;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
 import dev.vulcanium.site.tech.model.store.ReadableMerchantStore;
 import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
-import dev.vulcanium.site.tech.utils.DateUtil;
+import java.util.*;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableCatalogMapper implements Mapper<Catalog, ReadableCatalog> {

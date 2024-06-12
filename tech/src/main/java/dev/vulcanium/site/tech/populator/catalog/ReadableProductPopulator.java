@@ -1,21 +1,6 @@
 package dev.vulcanium.site.tech.populator.catalog;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-
 import dev.vulcanium.business.exception.ConversionException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductAttribute;
@@ -32,24 +17,22 @@ import dev.vulcanium.business.model.catalog.product.price.ProductPriceDescriptio
 import dev.vulcanium.business.model.catalog.product.type.ProductType;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
 import dev.vulcanium.site.tech.model.catalog.manufacturer.ReadableManufacturer;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProductFull;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProductPrice;
-import dev.vulcanium.site.tech.model.catalog.product.RentalOwner;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductAttribute;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductAttributeValue;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductOption;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductProperty;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductPropertyValue;
+import dev.vulcanium.site.tech.model.catalog.product.*;
+import dev.vulcanium.site.tech.model.catalog.product.attribute.*;
 import dev.vulcanium.site.tech.model.catalog.product.attribute.api.ReadableProductOptionValue;
-import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
 import dev.vulcanium.site.tech.model.catalog.product.type.ProductTypeDescription;
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductType;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import java.util.*;
+import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 public class ReadableProductPopulator extends
 		AbstractDataPopulator<Product, ReadableProduct> {

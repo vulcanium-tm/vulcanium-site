@@ -1,5 +1,19 @@
 package dev.vulcanium.site.tech.store.api.content;
 
+import dev.vulcanium.business.model.content.Content;
+import dev.vulcanium.business.model.content.ContentFile;
+import dev.vulcanium.business.model.content.FileContentType;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.FileNameUtils;
+import dev.vulcanium.business.utils.ImageFilePath;
+import dev.vulcanium.site.tech.model.content.ContentFolder;
+import dev.vulcanium.site.tech.store.api.exception.RestApiException;
+import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import dev.vulcanium.site.tech.store.facade.content.ContentFacade;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -7,10 +21,6 @@ import java.net.URLDecoder;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,31 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import dev.vulcanium.business.model.content.FileContentType;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.model.content.Content;
-import dev.vulcanium.business.model.content.ContentFile;
-import dev.vulcanium.site.tech.model.content.ContentFolder;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.store.facade.content.ContentFacade;
-import dev.vulcanium.site.tech.utils.FileNameUtils;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
-
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**

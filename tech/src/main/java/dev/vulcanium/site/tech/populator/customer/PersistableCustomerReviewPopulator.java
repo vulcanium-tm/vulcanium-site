@@ -1,22 +1,20 @@
 package dev.vulcanium.site.tech.populator.customer;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.commons.lang3.Validate;
-
 import dev.vulcanium.business.exception.ConversionException;
-import dev.vulcanium.business.services.customer.CustomerService;
-import dev.vulcanium.business.services.reference.language.LanguageService;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.model.customer.Customer;
 import dev.vulcanium.business.model.customer.review.CustomerReview;
 import dev.vulcanium.business.model.customer.review.CustomerReviewDescription;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.customer.CustomerService;
+import dev.vulcanium.business.services.reference.language.LanguageService;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.DateUtil;
 import dev.vulcanium.site.tech.model.customer.PersistableCustomerReview;
-import dev.vulcanium.site.tech.utils.DateUtil;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import org.apache.commons.lang3.Validate;
 
 public class PersistableCustomerReviewPopulator extends AbstractDataPopulator<PersistableCustomerReview, CustomerReview> {
 

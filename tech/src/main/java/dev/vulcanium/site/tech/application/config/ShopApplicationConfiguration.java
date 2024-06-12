@@ -1,9 +1,12 @@
 package dev.vulcanium.site.tech.application.config;
 
+import dev.vulcanium.business.configuration.CoreApplicationConfiguration;
+import dev.vulcanium.business.utils.LabelUtils;
+import dev.vulcanium.site.tech.filter.CorsFilter;
+import dev.vulcanium.site.tech.filter.XssFilter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -26,11 +29,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-
-import dev.vulcanium.business.configuration.CoreApplicationConfiguration;
-import dev.vulcanium.site.tech.filter.CorsFilter;
-import dev.vulcanium.site.tech.filter.XssFilter;
-import dev.vulcanium.site.tech.utils.LabelUtils;
 
 @Configuration
 @ComponentScan({"dev.vulcanium.business"})

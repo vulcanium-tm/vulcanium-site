@@ -1,28 +1,13 @@
 package dev.vulcanium.site.tech.mapper.catalog.product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductAttribute;
-import dev.vulcanium.business.model.catalog.product.attribute.ProductOption;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionDescription;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValue;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription;
+import dev.vulcanium.business.model.catalog.product.attribute.*;
 import dev.vulcanium.business.model.catalog.product.availability.ProductAvailability;
 import dev.vulcanium.business.model.catalog.product.description.ProductDescription;
 import dev.vulcanium.business.model.catalog.product.image.ProductImage;
@@ -32,29 +17,34 @@ import dev.vulcanium.business.model.catalog.product.price.ProductPriceDescriptio
 import dev.vulcanium.business.model.catalog.product.variant.ProductVariant;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableCategoryMapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableManufacturerMapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableProductTypeMapper;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
 import dev.vulcanium.site.tech.model.catalog.manufacturer.ReadableManufacturer;
+import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProductPrice;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductAttribute;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductAttributeValue;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductOption;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductProperty;
-import dev.vulcanium.site.tech.model.catalog.product.attribute.ReadableProductPropertyValue;
+import dev.vulcanium.site.tech.model.catalog.product.attribute.*;
 import dev.vulcanium.site.tech.model.catalog.product.attribute.api.ReadableProductOptionValue;
-import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
-import dev.vulcanium.site.tech.model.catalog.product.variant.ReadableProductVariant;
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductType;
+import dev.vulcanium.site.tech.model.catalog.product.variant.ReadableProductVariant;
 import dev.vulcanium.site.tech.model.references.DimensionUnitOfMeasure;
 import dev.vulcanium.site.tech.model.references.WeightUnitOfMeasure;
 import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import java.util.*;
+import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 /**
  * Works for product v2 model

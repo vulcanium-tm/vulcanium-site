@@ -1,18 +1,16 @@
 package dev.vulcanium.site.tech.populator.customer;
 
-import java.util.Set;
-
-import org.apache.commons.collections.CollectionUtils;
-
 import dev.vulcanium.business.exception.ConversionException;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.model.customer.review.CustomerReview;
 import dev.vulcanium.business.model.customer.review.CustomerReviewDescription;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.DateUtil;
 import dev.vulcanium.site.tech.model.customer.ReadableCustomer;
 import dev.vulcanium.site.tech.model.customer.ReadableCustomerReview;
-import dev.vulcanium.site.tech.utils.DateUtil;
+import java.util.Set;
+import org.apache.commons.collections.CollectionUtils;
 
 public class ReadableCustomerReviewPopulator extends AbstractDataPopulator<CustomerReview, ReadableCustomerReview> {
 

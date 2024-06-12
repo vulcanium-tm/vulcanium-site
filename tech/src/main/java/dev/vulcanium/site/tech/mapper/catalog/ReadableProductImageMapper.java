@@ -1,16 +1,14 @@
 package dev.vulcanium.site.tech.mapper.catalog;
 
-import jakarta.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.model.catalog.product.image.ProductImage;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableProductImageMapper implements Mapper<ProductImage, ReadableImage> {

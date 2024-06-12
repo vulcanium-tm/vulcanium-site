@@ -1,26 +1,15 @@
 package dev.vulcanium.site.tech.store.facade.items;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.catalog.product.relationship.ProductRelationshipService;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.ProductCriteria;
 import dev.vulcanium.business.model.catalog.product.relationship.ProductRelationship;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.services.catalog.product.relationship.ProductRelationshipService;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProductList;
 import dev.vulcanium.site.tech.model.catalog.product.group.ProductGroup;
@@ -28,7 +17,15 @@ import dev.vulcanium.site.tech.populator.catalog.ReadableProductPopulator;
 import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
 import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import jakarta.inject.Inject;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProductItemsFacadeImpl implements ProductItemsFacade {

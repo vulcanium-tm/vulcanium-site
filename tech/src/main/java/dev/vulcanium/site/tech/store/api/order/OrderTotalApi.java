@@ -1,24 +1,5 @@
 package dev.vulcanium.site.tech.store.api.order;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.customer.CustomerService;
-import dev.vulcanium.business.services.order.OrderService;
-import dev.vulcanium.business.services.shipping.ShippingQuoteService;
 import dev.vulcanium.business.model.customer.Customer;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.order.OrderSummary;
@@ -27,16 +8,25 @@ import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.shipping.ShippingSummary;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCart;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCartItem;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.customer.CustomerService;
+import dev.vulcanium.business.services.order.OrderService;
+import dev.vulcanium.business.services.shipping.ShippingQuoteService;
+import dev.vulcanium.business.utils.LabelUtils;
 import dev.vulcanium.site.tech.model.order.ReadableOrderTotalSummary;
 import dev.vulcanium.site.tech.populator.order.ReadableOrderSummaryPopulator;
 import dev.vulcanium.site.tech.store.facade.shoppingcart.ShoppingCartFacade;
-import dev.vulcanium.site.tech.utils.LabelUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
+import io.swagger.annotations.*;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

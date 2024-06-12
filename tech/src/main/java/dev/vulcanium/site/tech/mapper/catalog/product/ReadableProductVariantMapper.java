@@ -1,24 +1,13 @@
 package dev.vulcanium.site.tech.mapper.catalog.product;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.jsoup.helper.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.model.catalog.product.Product;
-import dev.vulcanium.business.model.catalog.product.variant.ProductVariantImage;
 import dev.vulcanium.business.model.catalog.product.variant.ProductVariant;
+import dev.vulcanium.business.model.catalog.product.variant.ProductVariantImage;
 import dev.vulcanium.business.model.content.FileContentType;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableProductVariationMapper;
 import dev.vulcanium.site.tech.mapper.inventory.ReadableInventoryMapper;
@@ -26,8 +15,16 @@ import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
 import dev.vulcanium.site.tech.model.catalog.product.inventory.ReadableInventory;
 import dev.vulcanium.site.tech.model.catalog.product.variant.ReadableProductVariant;
 import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import jakarta.inject.Inject;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
+import org.jsoup.helper.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableProductVariantMapper implements Mapper<ProductVariant, ReadableProductVariant> {

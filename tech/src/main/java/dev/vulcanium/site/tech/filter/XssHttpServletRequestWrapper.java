@@ -3,7 +3,7 @@ package dev.vulcanium.site.tech.filter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 
-import dev.vulcanium.site.tech.utils.SanitizeUtils;
+import dev.vulcanium.business.utils.SanitizeUtils;
 
 /**
  * Cross Site Scripting filter enforcing html encoding of request parameters

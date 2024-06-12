@@ -1,10 +1,10 @@
 package dev.vulcanium.site.tech.store.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-
-import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.SessionUtil;
 import dev.vulcanium.site.tech.store.model.paging.PaginationData;
+import jakarta.servlet.http.HttpServletRequest;
 
 public abstract class AbstractController {
 
@@ -17,17 +17,17 @@ public abstract class AbstractController {
  */
 @SuppressWarnings( "unchecked" )
 protected <T> T getSessionAttribute(final String key, HttpServletRequest request) {
-	return (T) dev.vulcanium.site.tech.utils.SessionUtil.getSessionAttribute(key, request);
+	return (T) SessionUtil.getSessionAttribute(key, request);
 	
 }
 
 protected void setSessionAttribute(final String key, final Object value, HttpServletRequest request) {
-	dev.vulcanium.site.tech.utils.SessionUtil.setSessionAttribute(key, value, request);
+	SessionUtil.setSessionAttribute(key, value, request);
 }
 
 
 protected void removeAttribute(final String key, HttpServletRequest request) {
-	dev.vulcanium.site.tech.utils.SessionUtil.removeSessionAttribute(key, request);
+	SessionUtil.removeSessionAttribute(key, request);
 }
 
 protected Language getLanguage(HttpServletRequest request) {

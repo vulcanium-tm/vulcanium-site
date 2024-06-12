@@ -1,22 +1,20 @@
 package dev.vulcanium.site.tech.store.security;
 
-import java.io.IOException;
-import java.util.Enumeration;
-
+import dev.vulcanium.business.model.common.UserContext;
+import dev.vulcanium.business.utils.GeoLocationUtils;
+import dev.vulcanium.site.tech.store.security.common.CustomAuthenticationManager;
 import jakarta.inject.Inject;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Enumeration;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import dev.vulcanium.business.model.common.UserContext;
-import dev.vulcanium.site.tech.store.security.common.CustomAuthenticationManager;
-import dev.vulcanium.site.tech.utils.GeoLocationUtils;
 
 
 public class AuthenticationTokenFilter extends OncePerRequestFilter {

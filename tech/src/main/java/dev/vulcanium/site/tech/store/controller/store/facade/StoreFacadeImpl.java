@@ -1,14 +1,35 @@
 package dev.vulcanium.site.tech.store.controller.store.facade;
 
+import dev.vulcanium.business.constants.MeasureUnit;
+import dev.vulcanium.business.exception.ConversionException;
+import dev.vulcanium.business.exception.ServiceException;
+import dev.vulcanium.business.model.common.GenericEntityList;
+import dev.vulcanium.business.model.content.InputContentFile;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.merchant.MerchantStoreCriteria;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.model.system.MerchantConfiguration;
+import dev.vulcanium.business.model.system.MerchantConfigurationType;
+import dev.vulcanium.business.services.content.ContentService;
+import dev.vulcanium.business.services.merchant.MerchantStoreService;
+import dev.vulcanium.business.services.reference.language.LanguageService;
+import dev.vulcanium.business.services.system.MerchantConfigurationService;
+import dev.vulcanium.business.utils.ImageFilePath;
+import dev.vulcanium.business.utils.LanguageUtils;
+import dev.vulcanium.site.tech.model.content.ReadableImage;
+import dev.vulcanium.site.tech.model.store.*;
+import dev.vulcanium.site.tech.populator.store.PersistableMerchantStorePopulator;
+import dev.vulcanium.site.tech.populator.store.ReadableMerchantStorePopulator;
+import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
+import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -18,35 +39,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import dev.vulcanium.business.exception.ConversionException;
-import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.content.ContentService;
-import dev.vulcanium.business.services.merchant.MerchantStoreService;
-import dev.vulcanium.business.services.reference.language.LanguageService;
-import dev.vulcanium.business.services.system.MerchantConfigurationService;
-import dev.vulcanium.business.constants.MeasureUnit;
-import dev.vulcanium.business.model.common.GenericEntityList;
-import dev.vulcanium.business.model.content.InputContentFile;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.merchant.MerchantStoreCriteria;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.model.system.MerchantConfiguration;
-import dev.vulcanium.business.model.system.MerchantConfigurationType;
-import dev.vulcanium.site.tech.model.content.ReadableImage;
-import dev.vulcanium.site.tech.model.store.MerchantConfigEntity;
-import dev.vulcanium.site.tech.model.store.PersistableBrand;
-import dev.vulcanium.site.tech.model.store.PersistableMerchantStore;
-import dev.vulcanium.site.tech.model.store.ReadableBrand;
-import dev.vulcanium.site.tech.model.store.ReadableMerchantStore;
-import dev.vulcanium.site.tech.model.store.ReadableMerchantStoreList;
-import dev.vulcanium.site.tech.populator.store.PersistableMerchantStorePopulator;
-import dev.vulcanium.site.tech.populator.store.ReadableMerchantStorePopulator;
-import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
-import dev.vulcanium.site.tech.utils.LanguageUtils;
 
 @Service("storeFacade")
 public class StoreFacadeImpl implements StoreFacade {

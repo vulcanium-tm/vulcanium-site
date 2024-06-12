@@ -1,30 +1,28 @@
 package dev.vulcanium.site.tech.mapper.catalog;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import org.jsoup.helper.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.description.ProductDescription;
 import dev.vulcanium.business.model.catalog.product.image.ProductImage;
 import dev.vulcanium.business.model.catalog.product.price.FinalPrice;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.Mapper;
+import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableMinimalProduct;
-import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
 import dev.vulcanium.site.tech.model.entity.ReadableDescription;
 import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import org.jsoup.helper.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableMinimalProductMapper implements Mapper<Product, ReadableMinimalProduct> {

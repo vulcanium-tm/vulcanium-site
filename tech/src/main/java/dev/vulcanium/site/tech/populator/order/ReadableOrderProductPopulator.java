@@ -2,28 +2,27 @@ package dev.vulcanium.site.tech.populator.order;
 
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.image.ProductImage;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.order.orderproduct.OrderProduct;
 import dev.vulcanium.business.model.order.orderproduct.OrderProductAttribute;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
 import dev.vulcanium.site.tech.model.order.ReadableOrderProduct;
 import dev.vulcanium.site.tech.model.order.ReadableOrderProductAttribute;
 import dev.vulcanium.site.tech.populator.catalog.ReadableProductPopulator;
 import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * Use mappers

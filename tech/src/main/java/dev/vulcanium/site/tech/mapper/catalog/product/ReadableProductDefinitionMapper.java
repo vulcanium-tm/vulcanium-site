@@ -1,17 +1,5 @@
 package dev.vulcanium.site.tech.mapper.catalog.product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.availability.ProductAvailability;
@@ -19,6 +7,8 @@ import dev.vulcanium.business.model.catalog.product.description.ProductDescripti
 import dev.vulcanium.business.model.catalog.product.image.ProductImage;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.Mapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableCategoryMapper;
 import dev.vulcanium.site.tech.mapper.catalog.ReadableManufacturerMapper;
@@ -26,16 +16,24 @@ import dev.vulcanium.site.tech.mapper.catalog.ReadableProductTypeMapper;
 import dev.vulcanium.site.tech.mapper.inventory.ReadableInventoryMapper;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
 import dev.vulcanium.site.tech.model.catalog.manufacturer.ReadableManufacturer;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
-import dev.vulcanium.site.tech.model.catalog.product.inventory.ReadableInventory;
 import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
+import dev.vulcanium.site.tech.model.catalog.product.ReadableImage;
 import dev.vulcanium.site.tech.model.catalog.product.definition.ReadableProductDefinition;
 import dev.vulcanium.site.tech.model.catalog.product.definition.ReadableProductDefinitionFull;
+import dev.vulcanium.site.tech.model.catalog.product.inventory.ReadableInventory;
 import dev.vulcanium.site.tech.model.catalog.product.type.ReadableProductType;
 import dev.vulcanium.site.tech.model.references.DimensionUnitOfMeasure;
 import dev.vulcanium.site.tech.model.references.WeightUnitOfMeasure;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReadableProductDefinitionMapper implements Mapper<Product, ReadableProductDefinition> {

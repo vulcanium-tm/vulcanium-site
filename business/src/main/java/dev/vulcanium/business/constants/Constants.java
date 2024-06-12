@@ -169,4 +169,48 @@ public final static Currency DEFAULT_CURRENCY = Currency.getInstance(Locale.US);
 
 public final static String PAYMENT_MODULES = "PAYMENT";
 
+public static class ACTION{
+	public static final String STORE = "store/";
+	public static final String DEFAULT = "DEFAULT/";
+	public static final String CATEGORY = "category/";
+	public static final String CONTENT = "content/";
+	public static final String PAGES = "pages/";
+	public static final String PRODUCT_GROUP = "products/group/";
+	public static final String PRODUCT = "product/";
+	public static final String PRODUCTS = "products/";
+	public static final String CART = "cart/";
+	public static final String CARTS = "cart";
+	public static final String PRICE = "price/";
+	public static final String CUSTOMER = "customer/";
+	public static final String LOGIN = "login/";
+	public static final String CUSTOMERS = "customers/";
+	public static final String MANUFACTURERS = "manufacturers/";
+	public static final String VARIANTS = "variants/";
+	public static final String CONFIG = "config/";
+	public static final String COUNTRY = "country/";
+	public static final String ZONES = "zones/";
+	public static final String AUTH = "auth/";
+	public static final String PROFILE = "profile";
+	public static final String SHIPPING = "shipping";
+	public static final String SHIPPING_COUNTRY = "shipping/country";
+	public static final String TOTAL = "total/";
+	public static final String NEWSLETTER = "newsletter/";
+	public static final String REGISTER = "register";
+	public static final String CHECKOUT = "checkout";
+	public static final String PASSWORD = "password/";
+	public static final String CONTACT = "contact/";
+	public static final String ORDERS = "orders/";
+	public static final String ADDRESS = "address";
+	public static final String RESET = "reset/";
+	public static final String REQUEST = "request/";
+	public static final String SEARCH = "search/";
+	public static final String AUTOCOMPLETE = "autocomplete/";
+	public static final String BOXES = "boxes/";
+	public static final String BANNER_TEXT = "bannerText/";
+	public static final String IMAGES = "images/";
+	public static final String HEADER_MESSAGE = "headerMessage/";
+	public static final String AGREEMENT = "agreement/";
+	public static final String PROMO = "promo/";
+}
+
 }

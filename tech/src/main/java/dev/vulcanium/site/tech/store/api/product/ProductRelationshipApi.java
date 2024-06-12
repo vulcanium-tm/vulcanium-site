@@ -1,33 +1,25 @@
 package dev.vulcanium.site.tech.store.api.product;
 
-import java.util.List;
-
+import dev.vulcanium.business.model.catalog.product.Product;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.services.catalog.product.review.ProductReviewService;
+import dev.vulcanium.business.utils.LanguageUtils;
+import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
+import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
+import dev.vulcanium.site.tech.store.facade.product.ProductFacade;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.catalog.product.review.ProductReviewService;
-import dev.vulcanium.business.model.catalog.product.Product;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
-import dev.vulcanium.site.tech.store.facade.product.ProductFacade;
-import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
-import dev.vulcanium.site.tech.utils.LanguageUtils;
-
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

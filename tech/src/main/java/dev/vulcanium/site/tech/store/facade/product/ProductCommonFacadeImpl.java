@@ -1,25 +1,7 @@
 package dev.vulcanium.site.tech.store.facade.product;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.catalog.product.review.ProductReviewService;
-import dev.vulcanium.business.services.customer.CustomerService;
-import dev.vulcanium.business.services.reference.language.LanguageService;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.catalog.product.availability.ProductAvailability;
@@ -29,14 +11,15 @@ import dev.vulcanium.business.model.catalog.product.review.ProductReview;
 import dev.vulcanium.business.model.catalog.product.variant.ProductVariant;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.services.catalog.product.review.ProductReviewService;
+import dev.vulcanium.business.services.customer.CustomerService;
+import dev.vulcanium.business.services.reference.language.LanguageService;
+import dev.vulcanium.business.utils.DateUtil;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.mapper.catalog.product.PersistableProductMapper;
-import dev.vulcanium.site.tech.model.catalog.product.LightPersistableProduct;
-import dev.vulcanium.site.tech.model.catalog.product.PersistableProductReview;
-import dev.vulcanium.site.tech.model.catalog.product.ProductPriceEntity;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
-import dev.vulcanium.site.tech.model.catalog.product.ReadableProductReview;
-import dev.vulcanium.site.tech.model.catalog.product.PersistableProduct;
-import dev.vulcanium.site.tech.model.catalog.product.ProductSpecification;
+import dev.vulcanium.site.tech.model.catalog.product.*;
 import dev.vulcanium.site.tech.populator.catalog.PersistableProductReviewPopulator;
 import dev.vulcanium.site.tech.populator.catalog.ReadableProductPopulator;
 import dev.vulcanium.site.tech.populator.catalog.ReadableProductReviewPopulator;
@@ -44,8 +27,16 @@ import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
 import dev.vulcanium.site.tech.store.api.exception.OperationNotAllowedException;
 import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.DateUtil;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import jakarta.inject.Inject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 @Service("productCommonFacade")
 public class ProductCommonFacadeImpl implements ProductCommonFacade {

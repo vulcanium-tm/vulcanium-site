@@ -1,42 +1,15 @@
 package dev.vulcanium.site.tech.store.facade.content;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.helper.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.content.ContentService;
-import dev.vulcanium.business.services.reference.language.LanguageService;
-import dev.vulcanium.business.model.content.Content;
-import dev.vulcanium.business.model.content.ContentDescription;
-import dev.vulcanium.business.model.content.ContentType;
-import dev.vulcanium.business.model.content.FileContentType;
-import dev.vulcanium.business.model.content.InputContentFile;
-import dev.vulcanium.business.model.content.OutputContentFile;
+import dev.vulcanium.business.model.content.*;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.content.ContentDescriptionEntity;
+import dev.vulcanium.business.services.content.ContentService;
+import dev.vulcanium.business.services.reference.language.LanguageService;
+import dev.vulcanium.business.utils.FilePathUtils;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.content.ContentFile;
-import dev.vulcanium.site.tech.model.content.ContentFolder;
-import dev.vulcanium.site.tech.model.content.ContentImage;
-import dev.vulcanium.site.tech.model.content.ReadableContentEntity;
-import dev.vulcanium.site.tech.model.content.ReadableContentFull;
+import dev.vulcanium.site.tech.model.content.*;
 import dev.vulcanium.site.tech.model.content.box.PersistableContentBox;
 import dev.vulcanium.site.tech.model.content.box.ReadableContentBox;
 import dev.vulcanium.site.tech.model.content.box.ReadableContentBoxFull;
@@ -47,8 +20,23 @@ import dev.vulcanium.site.tech.model.entity.ReadableEntityList;
 import dev.vulcanium.site.tech.store.api.exception.ConstraintException;
 import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
 import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.FilePathUtils;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import jakarta.inject.Inject;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.helper.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 @Component("contentFacade")
 public class ContentFacadeImpl implements ContentFacade {

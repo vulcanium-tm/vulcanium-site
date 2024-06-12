@@ -1,22 +1,20 @@
 package dev.vulcanium.site.tech.mapper.order;
 
+import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.order.OrderTotal;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.utils.LabelUtils;
+import dev.vulcanium.business.utils.LocaleUtils;
 import dev.vulcanium.site.tech.mapper.Mapper;
+import dev.vulcanium.site.tech.model.order.total.ReadableOrderTotal;
+import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
 import java.util.Locale;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.order.OrderTotal;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.order.total.ReadableOrderTotal;
-import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
-import dev.vulcanium.site.tech.utils.LabelUtils;
-import dev.vulcanium.site.tech.utils.LocaleUtils;
 
 @Component
 public class ReadableOrderTotalMapper implements Mapper<OrderTotal, ReadableOrderTotal>{

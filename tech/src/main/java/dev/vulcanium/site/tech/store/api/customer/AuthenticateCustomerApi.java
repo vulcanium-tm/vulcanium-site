@@ -1,9 +1,24 @@
 package dev.vulcanium.site.tech.store.api.customer;
 
+import dev.vulcanium.business.model.customer.Customer;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.AuthorizationUtils;
+import dev.vulcanium.site.tech.model.customer.PersistableCustomer;
+import dev.vulcanium.site.tech.store.api.exception.GenericRuntimeException;
+import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
+import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
+import dev.vulcanium.site.tech.store.facade.customer.CustomerFacade;
+import dev.vulcanium.site.tech.store.facade.user.UserFacade;
+import dev.vulcanium.site.tech.store.security.AuthenticationRequest;
+import dev.vulcanium.site.tech.store.security.AuthenticationResponse;
+import dev.vulcanium.site.tech.store.security.JWTTokenUtil;
+import dev.vulcanium.site.tech.store.security.PasswordRequest;
+import dev.vulcanium.site.tech.store.security.user.JWTUser;
+import io.swagger.annotations.*;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,37 +33,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
-import dev.vulcanium.business.model.customer.Customer;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.site.tech.model.customer.PersistableCustomer;
-import dev.vulcanium.site.tech.store.api.exception.GenericRuntimeException;
-import dev.vulcanium.site.tech.store.api.exception.ResourceNotFoundException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-import dev.vulcanium.site.tech.store.facade.customer.CustomerFacade;
-import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
-import dev.vulcanium.site.tech.store.facade.user.UserFacade;
-import dev.vulcanium.site.tech.store.security.AuthenticationRequest;
-import dev.vulcanium.site.tech.store.security.AuthenticationResponse;
-import dev.vulcanium.site.tech.store.security.JWTTokenUtil;
-import dev.vulcanium.site.tech.store.security.PasswordRequest;
-import dev.vulcanium.site.tech.store.security.user.JWTUser;
-import dev.vulcanium.site.tech.utils.AuthorizationUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController

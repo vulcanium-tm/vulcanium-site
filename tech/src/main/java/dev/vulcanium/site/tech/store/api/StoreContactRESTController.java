@@ -1,36 +1,26 @@
 package dev.vulcanium.site.tech.store.api;
 
-import java.util.Locale;
-import java.util.Map;
-
+import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.merchant.MerchantStoreService;
+import dev.vulcanium.business.services.reference.language.LanguageService;
+import dev.vulcanium.business.utils.EmailTemplatesUtils;
+import dev.vulcanium.business.utils.LocaleUtils;
+import dev.vulcanium.business.utils.ajax.AjaxResponse;
+import dev.vulcanium.site.tech.model.shop.ContactForm;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-
+import java.util.Locale;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import dev.vulcanium.business.services.catalog.category.CategoryService;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.merchant.MerchantStoreService;
-import dev.vulcanium.business.services.reference.language.LanguageService;
-import dev.vulcanium.business.utils.ajax.AjaxResponse;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.site.tech.model.shop.ContactForm;
-import dev.vulcanium.site.tech.utils.EmailTemplatesUtils;
-import dev.vulcanium.site.tech.utils.LocaleUtils;
+import org.springframework.web.bind.annotation.*;
 
 
 /**

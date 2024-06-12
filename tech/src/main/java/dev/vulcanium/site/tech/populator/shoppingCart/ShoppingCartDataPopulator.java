@@ -1,21 +1,6 @@
 package dev.vulcanium.site.tech.populator.shoppingCart;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.shoppingcart.ShoppingCartCalculationService;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionDescription;
 import dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription;
 import dev.vulcanium.business.model.catalog.product.description.ProductDescription;
@@ -25,11 +10,24 @@ import dev.vulcanium.business.model.order.OrderSummary;
 import dev.vulcanium.business.model.order.OrderTotalSummary;
 import dev.vulcanium.business.model.reference.language.Language;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCart;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.shoppingcart.ShoppingCartCalculationService;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.order.total.OrderTotal;
 import dev.vulcanium.site.tech.model.shoppingcart.ShoppingCartAttribute;
 import dev.vulcanium.site.tech.model.shoppingcart.ShoppingCartData;
 import dev.vulcanium.site.tech.model.shoppingcart.ShoppingCartItem;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Deprecated

@@ -1,22 +1,21 @@
 package dev.vulcanium.site.tech.populator.order;
 
+import dev.vulcanium.business.exception.ConversionException;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.order.OrderTotal;
+import dev.vulcanium.business.model.order.OrderTotalSummary;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.utils.AbstractDataPopulator;
+import dev.vulcanium.business.utils.LabelUtils;
+import dev.vulcanium.site.tech.model.order.ReadableOrderTotalSummary;
+import dev.vulcanium.site.tech.model.order.total.ReadableOrderTotal;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
-
-import dev.vulcanium.business.exception.ConversionException;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.utils.AbstractDataPopulator;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.order.OrderTotal;
-import dev.vulcanium.business.model.order.OrderTotalSummary;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.site.tech.model.order.ReadableOrderTotalSummary;
-import dev.vulcanium.site.tech.model.order.total.ReadableOrderTotal;
-import dev.vulcanium.site.tech.utils.LabelUtils;
 
 @Getter
 @Setter

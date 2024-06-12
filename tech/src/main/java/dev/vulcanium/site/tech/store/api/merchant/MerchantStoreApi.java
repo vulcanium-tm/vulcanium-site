@@ -1,5 +1,23 @@
 package dev.vulcanium.site.tech.store.api.merchant;
 
+import com.google.common.collect.ImmutableMap;
+import dev.vulcanium.business.constants.Constants;
+import dev.vulcanium.business.model.content.FileContentType;
+import dev.vulcanium.business.model.content.InputContentFile;
+import dev.vulcanium.business.model.merchant.MerchantStore;
+import dev.vulcanium.business.model.merchant.MerchantStoreCriteria;
+import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.utils.ServiceRequestCriteriaBuilderUtils;
+import dev.vulcanium.site.tech.model.entity.EntityExists;
+import dev.vulcanium.site.tech.model.store.*;
+import dev.vulcanium.site.tech.store.api.exception.RestApiException;
+import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
+import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
+import dev.vulcanium.site.tech.store.facade.user.UserFacade;
+import io.swagger.annotations.*;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,53 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.common.collect.ImmutableMap;
-import dev.vulcanium.business.model.content.FileContentType;
-import dev.vulcanium.business.model.content.InputContentFile;
-import dev.vulcanium.business.model.merchant.MerchantStore;
-import dev.vulcanium.business.model.merchant.MerchantStoreCriteria;
-import dev.vulcanium.business.model.reference.language.Language;
-import dev.vulcanium.business.constants.Constants;
-import dev.vulcanium.site.tech.model.entity.EntityExists;
-import dev.vulcanium.site.tech.model.store.PersistableBrand;
-import dev.vulcanium.site.tech.model.store.PersistableMerchantStore;
-import dev.vulcanium.site.tech.model.store.ReadableBrand;
-import dev.vulcanium.site.tech.model.store.ReadableMerchantStore;
-import dev.vulcanium.site.tech.model.store.ReadableMerchantStoreList;
-import dev.vulcanium.site.tech.store.api.exception.RestApiException;
-import dev.vulcanium.site.tech.store.api.exception.UnauthorizedException;
-import dev.vulcanium.site.tech.store.controller.store.facade.StoreFacade;
-import dev.vulcanium.site.tech.store.facade.user.UserFacade;
-import dev.vulcanium.site.tech.utils.ServiceRequestCriteriaBuilderUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController

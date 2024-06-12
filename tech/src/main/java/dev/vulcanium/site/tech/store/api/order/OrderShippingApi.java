@@ -1,27 +1,5 @@
 package dev.vulcanium.site.tech.store.api.order;
 
-import java.security.Principal;
-import java.util.List;
-import java.util.Locale;
-
-import jakarta.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.customer.CustomerService;
-import dev.vulcanium.business.services.reference.country.CountryService;
 import dev.vulcanium.business.model.common.Delivery;
 import dev.vulcanium.business.model.customer.Customer;
 import dev.vulcanium.business.model.merchant.MerchantStore;
@@ -31,18 +9,28 @@ import dev.vulcanium.business.model.shipping.ShippingOption;
 import dev.vulcanium.business.model.shipping.ShippingQuote;
 import dev.vulcanium.business.model.shipping.ShippingSummary;
 import dev.vulcanium.business.model.shoppingcart.ShoppingCart;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.customer.CustomerService;
+import dev.vulcanium.business.services.reference.country.CountryService;
+import dev.vulcanium.business.utils.LabelUtils;
 import dev.vulcanium.site.tech.model.customer.address.AddressLocation;
 import dev.vulcanium.site.tech.model.order.shipping.ReadableShippingSummary;
 import dev.vulcanium.site.tech.populator.order.ReadableShippingSummaryPopulator;
 import dev.vulcanium.site.tech.store.facade.order.OrderFacade;
 import dev.vulcanium.site.tech.store.facade.shoppingcart.ShoppingCartFacade;
-import dev.vulcanium.site.tech.utils.LabelUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
+import io.swagger.annotations.*;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.security.Principal;
+import java.util.List;
+import java.util.Locale;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller

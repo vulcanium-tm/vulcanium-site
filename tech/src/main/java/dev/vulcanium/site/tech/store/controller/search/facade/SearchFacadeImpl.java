@@ -1,28 +1,16 @@
 package dev.vulcanium.site.tech.store.controller.search.facade;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import jakarta.inject.Inject;
-
-import org.jsoup.helper.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
 import dev.vulcanium.business.exception.ConversionException;
 import dev.vulcanium.business.exception.ServiceException;
-import dev.vulcanium.business.services.catalog.category.CategoryService;
-import dev.vulcanium.business.services.catalog.pricing.PricingService;
-import dev.vulcanium.business.services.catalog.product.ProductService;
-import dev.vulcanium.business.services.search.SearchService;
 import dev.vulcanium.business.model.catalog.category.Category;
 import dev.vulcanium.business.model.catalog.product.Product;
 import dev.vulcanium.business.model.merchant.MerchantStore;
 import dev.vulcanium.business.model.reference.language.Language;
+import dev.vulcanium.business.services.catalog.category.CategoryService;
+import dev.vulcanium.business.services.catalog.pricing.PricingService;
+import dev.vulcanium.business.services.catalog.product.ProductService;
+import dev.vulcanium.business.services.search.SearchService;
+import dev.vulcanium.business.utils.ImageFilePath;
 import dev.vulcanium.site.tech.model.catalog.SearchProductRequest;
 import dev.vulcanium.site.tech.model.catalog.category.ReadableCategory;
 import dev.vulcanium.site.tech.model.catalog.product.ReadableProduct;
@@ -31,12 +19,20 @@ import dev.vulcanium.site.tech.populator.catalog.ReadableCategoryPopulator;
 import dev.vulcanium.site.tech.populator.catalog.ReadableProductPopulator;
 import dev.vulcanium.site.tech.store.api.exception.ConversionRuntimeException;
 import dev.vulcanium.site.tech.store.api.exception.ServiceRuntimeException;
-import dev.vulcanium.site.tech.utils.ImageFilePath;
-
+import jakarta.inject.Inject;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import modules.commons.search.request.Aggregation;
 import modules.commons.search.request.SearchItem;
 import modules.commons.search.request.SearchRequest;
 import modules.commons.search.request.SearchResponse;
+import org.jsoup.helper.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 @Service("searchFacade")
 public class SearchFacadeImpl implements SearchFacade {
