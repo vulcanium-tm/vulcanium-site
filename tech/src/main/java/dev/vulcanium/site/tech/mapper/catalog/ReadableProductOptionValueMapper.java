@@ -29,9 +29,11 @@ public ReadableProductOptionValue merge(ProductOptionValue source, ReadableProdu
 	ReadableProductOptionValue readableProductOptionValue = new ReadableProductOptionValue();
 	if(language == null) {
 		readableProductOptionValue = new ReadableProductOptionValueFull();
-		List<dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription> descriptions = new ArrayList<dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription>();
+		List<dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription> descriptions =
+				new ArrayList<dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription>();
 		for(ProductOptionValueDescription desc : source.getDescriptions()) {
-			dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription d = this.description(desc);
+			dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription d =
+					this.description(desc);
 			descriptions.add(d);
 		}
 		((ReadableProductOptionValueFull)readableProductOptionValue).setDescriptions(descriptions);
@@ -40,7 +42,8 @@ public ReadableProductOptionValue merge(ProductOptionValue source, ReadableProdu
 		if(!CollectionUtils.isEmpty(source.getDescriptions())) {
 			for(ProductOptionValueDescription desc : source.getDescriptions()) {
 				if(desc != null && desc.getLanguage()!= null && desc.getLanguage().getId() == language.getId()) {
-					dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription d = this.description(desc);
+					dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription d =
+							this.description(desc);
 					readableProductOptionValue.setDescription(d);
 				}
 			}
@@ -61,10 +64,9 @@ public ReadableProductOptionValue merge(ProductOptionValue source, ReadableProdu
 	return readableProductOptionValue;
 }
 
-
-
-dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription description(ProductOptionValueDescription description) {
-	dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription desc = new dev.vulcanium.business.model.catalog.product.attribute.ProductOptionValueDescription();
+dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription description(ProductOptionValueDescription description){
+	dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription desc =
+			new dev.vulcanium.site.tech.model.catalog.product.attribute.ProductOptionValueDescription();
 	desc.setDescription(description.getDescription());
 	desc.setName(description.getName());
 	desc.setId(description.getId());
